@@ -1,6 +1,6 @@
 package com.eomcs.basic.ex03;
 
-public class Exam33 {  //공개 클래스인 경우 클래스명과 파일명은 꼭 같아야 함
+public class Exam33 {  
     //부동 소수점 리터럴 - 최소값과 최대값
 
   public static void main(String[] args) {

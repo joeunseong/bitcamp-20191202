@@ -1,7 +1,7 @@
 package com.eomcs.basic.ex03;
 
         //부동 소수점 리터럴 - 부동소수점을 메모리에 저장하기
-public class Exam34 {  //공개 클래스인 경우 클래스명과 파일명은 꼭 같아야 함
+public class Exam34 {  
 
   public static void main(String[] args) {
     // 4바이트 부동소수점 유효 자릿수 : 7자리

@@ -1,8 +1,9 @@
 package com.eomcs.basic.ex03;
 
-public class Exam31 {  //공개 클래스인 경우 클래스명과 파일명은 꼭 같아야 함
+public class Exam31 { 
     //부동 소수점 리터럴
   public static void main(String[] args) {
+    
     //고정 소수점
     System.out.println(3.14159);
     

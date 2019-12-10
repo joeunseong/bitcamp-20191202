@@ -2,8 +2,8 @@ package com.eomcs.basic.ex03;
 
 public class Exam24 {  //공개 클래스인 경우 클래스명과 파일명은 꼭 같아야 함
   public static void main(final String[] args) {
-    //23
-    //=> 1000 0000 0000 0000 0000 0000 0001  0111 (-23)
+    //(23) 0000 0000 0000 0000 0000 0000 0001  0111
+    
     System.out.println(23);
 
     //-23
