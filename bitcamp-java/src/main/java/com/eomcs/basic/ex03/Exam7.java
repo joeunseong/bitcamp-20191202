@@ -19,11 +19,16 @@ public class Exam7 {
     System.out.println("Hello, 'w'orld!"); // "" 안에서 '문자는 그냥 적는다.
     System.out.println('\''); // '' 안에서 ' 문자를 출력시키는 문자
     System.out.println('"'); // '' 안에서 " 문자는 그냥 적는다.
-    System.out.println("c:\\Users\\user\\git"); // \ 문자를 출력시키는 문자
-
-
-
-
-    
+    System.out.println("c:\\Users\\user\\git"); // \ 문자를 출력시키는 문자   
   }
 }
+
+// 줄바꿈 코드
+// Carrage Return(CR) : 0d
+//Line Feed(LF) : 0a
+//
+// - Windows OS는 줄바꿈을 표시하기 위해
+//  CRLF 2바이트 코드를 삽입한다.
+// - Unix os에서는 줄바꿈을 표시하기 위해
+// LF 1바이트 코드를 삽입한다.
+
