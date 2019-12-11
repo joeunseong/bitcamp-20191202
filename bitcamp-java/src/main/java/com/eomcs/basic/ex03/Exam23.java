@@ -1,6 +1,6 @@
 package com.eomcs.basic.ex03;
 
-public class Exam23 {  //공개 클래스인 경우 클래스명과 파일명은 꼭 같아야 함
+public class Exam23 {
   public static void main(final String[] args) {
    //정수 리터럴(literal) - 메모리 크기와 유효 값 범위
    // 리터럴 : 4바이트(32bit,기본), 8바이트
