@@ -31,7 +31,7 @@ public class App3 {
       response = keyboard.nextLine();
       
       if (!response.equalsIgnoreCase("y")) {
-        break; //반복문을 멈춰라
+        break;
       }
     }
     
