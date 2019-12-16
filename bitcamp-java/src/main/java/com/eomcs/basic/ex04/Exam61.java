@@ -35,7 +35,6 @@ public class Exam61 {
     // 배열 레퍼런스는 배열 인스턴스의 주소를 담는다.
     arr2 = arr1; //arr1에 저장된 배열 인스턴서의 주소를 담는다.
 
-
     System.out.println(arr2[0]);
     arr2[0] = 300;
     System.out.println(arr1[0]);
