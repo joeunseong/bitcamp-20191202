@@ -2,7 +2,7 @@ package com.eomcs.basic.ex06.assignment;
 
 import java.util.Scanner;
 
-// 현재 과제와 가장 유사한 결과를 내는 소스를 가져와서 편집한다.
+//현재 과제와 가장 유사한 결과를 내는 소스를 가져와서 편집한다.
 public class Test03 {
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
@@ -10,25 +10,10 @@ public class Test03 {
     System.out.print("밑변 길이? ");
     int width = keyScan.nextInt();
 
-    if (width % 2 == 0) {
-      width--;
-    }
-
-    int spaceSize = width >> 1;
     int line = 0;
     while (line++ < width) {// 0부터 시작하면 <= 틀림 / <가 맞음
-      if (line % 2 == 0) {
-        continue;
-      }
-
-      int count = 0;
-      while (count++ < spaceSize) {
-        System.out.print(" ");
-      }
-      spaceSize--;
-
       int x = 0;
-      while (x++ < line) { // 라인 갯수에 따라서 별 개수 출력 1번줄이면 1개 2번째줄이면 2개...
+      while (x++ < line) { //라인 갯수에 따라서 별 개수 출력 1번줄이면 1개 2번째줄이면 2개...
         System.out.printf("*");
       }
       System.out.println();
