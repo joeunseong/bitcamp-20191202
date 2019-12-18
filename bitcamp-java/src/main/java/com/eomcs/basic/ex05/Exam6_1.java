@@ -14,7 +14,7 @@ public class Exam6_1 {
 
     System.out.println(i);
 
-    System.out.println(i++);
+    System.out.println(i++); // =>i값을 먼저 출력 후에 그다음에 ++을 해준다
     // System.out.println(4);
     // i = i + 1;
     System.out.println(i);

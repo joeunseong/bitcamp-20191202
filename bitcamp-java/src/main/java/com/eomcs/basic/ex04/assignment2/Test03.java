@@ -1,7 +1,7 @@
 package com.eomcs.basic.ex04.assignment2;
 
 import java.util.Scanner;
-//import java.util.StringTokenizer;
+// import java.util.StringTokenizer;
 
 public class Test03 {
 
@@ -12,17 +12,28 @@ public class Test03 {
     int num2 = scanner.nextInt();
     int sum = 0;
     for (int i = num1; i <= num2; i++) {
-      sum = sum + i;
+      sum = sum + i; // sum+=i;
     }
+    scanner.close();
     System.out.printf("%d에서 %d까지의 합은 %d입니다.", num1, num2, sum);
 
-    
+    /*
+     int start = scanner.nextInt();
+     int end = scanner.nextInt();
+     int sum = 0;
+     int no = start;
+     while(no<=end) {
+     sum += no;
+     no++;
+     
+     */
+
     // StringTokenizer를 사용한 입력 처리
-//    StringTokenizer st = new StringTokenizer(scanner.nextLine(), " ");
-//    System.out.println(st.nextToken());
-//    System.out.println(st.nextToken());
-//    System.out.println(st.nextToken());
-//    st.nextToken();
+    // StringTokenizer st = new StringTokenizer(scanner.nextLine(), " ");
+    // System.out.println(st.nextToken());
+    // System.out.println(st.nextToken());
+    // System.out.println(st.nextToken());
+    // st.nextToken();
   }
 
 }

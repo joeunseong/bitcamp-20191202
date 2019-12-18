@@ -9,7 +9,6 @@ public class Exam6_8 {
     // 1) int result = 3 + 4 * 5;
     // 2) int result = 3 + 20;
     // 3) int result = 23;
-
     System.out.println(result); // 23
 
     // 주의!
