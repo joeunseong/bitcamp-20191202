@@ -1,66 +1,70 @@
 package com.eomcs.lms;
 
+import java.sql.Date;
 import java.util.Scanner;
 
-public class App2 {
+public class App2 { 
   public static void main(String[] args) {
     Scanner keyboard = new Scanner(System.in);
-    int[] no = new int[100];
-    String[] name = new String[100];
-    String[] email = new String[100];
-    String[] password = new String[100];
-    String[] photo = new String[100];
-    String[] tel = new String[100];
-    String[] registeredDate = new String[100];
+
+    class Member {
+      int no;
+      String name;
+      String email;
+      String password;
+      String photo;
+      String tel;
+      Date registeredDate;
+    }
+
+    final int SIZE = 100;
+
+    // Member 인스턴스의 주소를 저장할 레퍼런스 배열을 준비한다.
+    Member[] members = new Member[SIZE];
+
+    
     int count = 0;
 
-    for (int i = 0; i < 100; i++) {
-      System.out.print("번호는? ");
-      no[i] = keyboard.nextInt();
+    for (int i = 0; i < SIZE; i++) {
+      Member member = new Member();
 
-      keyboard.nextLine();
+      System.out.print("번호? ");
+      member.no = keyboard.nextInt();
+      keyboard.nextLine(); // 줄바꿈 기호 제거용
 
-      System.out.print("이름은? ");
-      name[i] = keyboard.nextLine();
+      System.out.print("이름? ");
+      member.name = keyboard.nextLine();
 
-      System.out.print("이메일은? ");
-      email[i] = keyboard.nextLine();
+      System.out.print("이메일? ");
+      member.email = keyboard.nextLine();
 
-      System.out.print("암호는? ");
-      password[i] = keyboard.nextLine();
+      System.out.print("암호? ");
+      member.password = keyboard.nextLine();
 
-      System.out.print("사진는? ");
-      photo[i] = keyboard.nextLine();
+      System.out.print("사진? ");
+      member.photo = keyboard.nextLine();
 
-      System.out.print("전화는? ");
-      tel[i] = keyboard.nextLine();
+      System.out.print("전화? ");
+      member.tel = keyboard.nextLine();
 
-      System.out.print("가입일은? ");
-      registeredDate[i] = keyboard.nextLine();
+      member.registeredDate = new Date(System.currentTimeMillis());
 
+      members[i] = member;
       count++;
-      System.out.println("계속 입력하시겠습니까?(Y/n)");
-      String answer = keyboard.nextLine();
-
-      if (!answer.equalsIgnoreCase("y")) {
+      System.out.print("계속 입력하시겠습니까?(Y/n) ");
+      String response = keyboard.nextLine();
+      if (!response.equalsIgnoreCase("y"))
         break;
-      }
     }
     keyboard.close();
 
     System.out.println();
 
     for (int i = 0; i < count; i++) {
-      System.out.printf("번호: %d\n", no[i]);
-      System.out.printf("이름: %s\n", name[i]);
-      System.out.printf("이메일: %s\n", email[i]);
-      System.out.printf("암호: %s\n", password[i]);
-      System.out.printf("사진: %s\n", photo[i]);
-      System.out.printf("전화: %s\n", tel[i]);
-      System.out.printf("가입일: %s\n", registeredDate[i]);
-      System.out.println();
+      Member member = members[i];
+      System.out.printf("%d, %s, %s, %s, %s\n", 
+          member.no, member.name, member.email, 
+          member.tel, member.registeredDate);
     }
   }
 }
-
-

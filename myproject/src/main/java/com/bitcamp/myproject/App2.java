@@ -50,14 +50,8 @@ public class App2 {
     System.out.println();
 
     for(int i = 0; i< count; i++) {
-    System.out.printf("번호: %d\n", no[i]);
-    System.out.printf("이름: %s\n", name[i]);
-    System.out.printf("이메일: %s\n", email[i]);
-    System.out.printf("암호: %s\n", password[i]);
-    System.out.printf("사진: %s\n", photo[i]);
-    System.out.printf("전화: %s\n", tel[i]);
-    System.out.printf("가입일: %s\n", registerDate[i]);
-    System.out.println();
+      System.out.printf("%d, %s, %s, %s, %s\n", 
+          no[i], name[i], email[i], tel[i], registerDate[i]);
     }
   }
 }

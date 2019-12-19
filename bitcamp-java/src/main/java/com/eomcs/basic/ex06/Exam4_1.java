@@ -10,8 +10,12 @@ public class Exam4_1 {
     // for 문의 전형적인 예
     for (int i = 1; i <= 5; i++) 
       System.out.println(i);
-
+    
+    //for문 변수는 for문 안에서만 쓸 수 있음
+    //System.out.println(i); 
+    
     System.out.println("----------------------");
+    
     for (int i = 1; i <= 5;) {
       System.out.println(i);
       i++; 
@@ -23,6 +27,7 @@ public class Exam4_1 {
       System.out.println(i);
       i++; 
     }
+    System.out.println(i);
 
     System.out.println("----------------------");
     i = 1;
