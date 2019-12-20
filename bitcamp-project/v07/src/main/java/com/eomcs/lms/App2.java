@@ -22,10 +22,13 @@ public class App2 {
     // Member 인스턴스의 주소를 저장할 레퍼런스 배열을 준비한다.
     Member[] members = new Member[SIZE];
 
-    
     int count = 0;
 
     for (int i = 0; i < SIZE; i++) {
+      
+      count++;
+
+      // 회원정보를 저장할 메모리를 Member 설계도에 따라 만든다.
       Member member = new Member();
 
       System.out.print("번호? ");
@@ -49,8 +52,9 @@ public class App2 {
 
       member.registeredDate = new Date(System.currentTimeMillis());
 
+      // 회원 정보가 담겨있는 인스턴스의 주소를 레퍼런스 배열에 보관한다.
       members[i] = member;
-      count++;
+      
       System.out.print("계속 입력하시겠습니까?(Y/n) ");
       String response = keyboard.nextLine();
       if (!response.equalsIgnoreCase("y"))

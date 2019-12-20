@@ -3,9 +3,9 @@ package com.eomcs.lms;
 import java.sql.Date;
 import java.util.Scanner;
 
-// 입력을 카운트하기
 public class App3 {
   public static void main(String[] args) {
+    
     Scanner keyboard = new Scanner(System.in);
 
     // 게시글 데이터를 저장할 메모리를 설계한다.
@@ -64,3 +64,11 @@ public class App3 {
     }
   }
 }
+
+
+
+
+
+
+
+
