@@ -2,10 +2,6 @@ package com.eomcs.basic.ex07;
 
 //# 메서드 : call by reference II
 //
-class MyObject {
-  int a;
-  int b;
-}
 
 public class Exam0330 {
 
@@ -13,6 +9,11 @@ public class Exam0330 {
   // primitive data type 값을 직접 넘기지 말고 
   // 객체에 담아 넘겨라!
 
+  static class MyObject {
+    int a;
+    int b;
+  }
+  
   static void swap(MyObject ref) {
     System.out.printf("swap(): a=%d, b=%d\n", ref.a, ref.b);
     int temp = ref.a;
