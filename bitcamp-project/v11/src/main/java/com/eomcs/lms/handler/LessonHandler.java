@@ -1,4 +1,4 @@
-package com.eomcs.lms;
+package com.eomcs.lms.handler;
 
 import java.sql.Date;
 import java.util.Scanner;
@@ -17,15 +17,15 @@ public class LessonHandler {
   static final int LESSON_SIZE = 100;
   static Lesson[] lessons = new Lesson[LESSON_SIZE];
   static int lessonCount = 0;
-  static Scanner keyboard;
-  
-  static void addLesson() {
+  public static Scanner keyboard;
+
+  public static void addLesson() {
     Lesson lesson = new Lesson();
 
     System.out.print("번호? ");
     lesson.no = keyboard.nextInt();
 
-    keyboard.nextLine(); // nextInt() 후에 남아 있는 줄바꿈 기호를 제거한다.
+    keyboard.nextLine(); 
 
     System.out.print("수업명? ");
     lesson.title = keyboard.nextLine();
@@ -49,7 +49,7 @@ public class LessonHandler {
     System.out.println("저장하였습니다.");
   }
 
-  static void listLesson() {
+  public static void listLesson() {
     for (int i = 0; i < lessonCount; i++) {
       Lesson l = lessons[i];
       System.out.printf("%d, %s, %s ~ %s, %d\n", l.no, l.title, l.startDate, l.endDate,
