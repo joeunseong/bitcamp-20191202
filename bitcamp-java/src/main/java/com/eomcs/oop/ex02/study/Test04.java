@@ -39,5 +39,6 @@ public class Test04 {
     GasStation.clean(c1);
     GasStation.clean(c2);
 
+
   }
 }

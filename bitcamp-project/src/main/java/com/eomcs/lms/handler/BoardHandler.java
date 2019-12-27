@@ -2,7 +2,7 @@ package com.eomcs.lms.handler;
 
 import java.sql.Date;
 import java.util.Scanner;
-import com.eomcs.lms.domain.Board;
+import com.eomcs.lms.domain.Review;
 
 public class BoardHandler {
 
@@ -10,7 +10,7 @@ public class BoardHandler {
   // => new 명령을 실행해야만 생성되는 변수이다.
   // => 개별적으로 관리되어야 하는 값일 경우 인스턴스 필드로 선언한다.
   //
-  Board[] boards;
+  Review[] boards;
   int boardCount = 0;
 
   // 이전까지 게시물 데이터를 입력 받을 때 키보드에서 입력 받았지만,
@@ -38,22 +38,22 @@ public class BoardHandler {
     // 생성자에서 해야할 일은 인스턴스를 생성할 때
     // 이런 의존 객체를 반드시 초기화 시키도록 하는 것이다.
     this.input = input;
-    this.boards = new Board[BOARD_SIZE];
+    this.boards = new Review[BOARD_SIZE];
   }
 
   public BoardHandler(Scanner input, int capacity) {
     this.input = input;
     if (capacity < BOARD_SIZE || capacity > 10000) 
-      this.boards = new Board[BOARD_SIZE];
+      this.boards = new Review[BOARD_SIZE];
     else 
-      this.boards = new Board[capacity];
+      this.boards = new Review[capacity];
   }
 
   // 클래스 메소드
   // => 인스턴스 없이 호출하는 메소드
   // =>인스턴스를 사용하려면 파라미터를 통해 호출할 때 외부에서 받아야 한다.
   public void addBoard() { // BoardHandle의 인스턴스 주소
-    Board board = new Board();
+    Review board = new Review();
 
     System.out.print("번호? ");
     board.no = input.nextInt();
@@ -79,7 +79,7 @@ public class BoardHandler {
   // "연산자(operation)"라 부를 수 있다.
   public void listBoard() { // BoardHandle의 인스턴스 주소
     for (int i = 0; i < this.boardCount; i++) {
-      Board b = this.boards[i];
+      Review b = this.boards[i];
       System.out.printf("%d, %s, %s, %d\n", b.no, b.title, b.date, b.viewCount);
     }
   }
@@ -89,7 +89,7 @@ public class BoardHandler {
     int no = input.nextInt();
     input.nextLine(); // 숫자 뒤에 남은 공백 제거
 
-    Board board = null;
+    Review board = null;
     for (int i = 0; i < this.boardCount; i++) {
       if (this.boards[i].no == no) {
         board = this.boards[i];
