@@ -8,4 +8,6 @@ public class Board {
  public Date date;
  public int viewCount;
  public String writer;
+ 
+ 
 }

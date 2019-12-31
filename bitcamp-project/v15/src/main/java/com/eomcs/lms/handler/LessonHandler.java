@@ -1,24 +1,23 @@
 package com.eomcs.lms.handler;
 
 import java.sql.Date;
+
 import java.util.Scanner;
 import com.eomcs.lms.domain.Lesson;
 
 public class LessonHandler {
-  LessonList lessonList;
-  
+
+  // 인스턴스 필드 : 각 수업 목록을 개별적 관리
+  Lesson[] lessons;
+  int lessonCount = 0;
+
+  // 클래스 필드 : 공유한 변수
+  static final int LESSON_SIZE = 100;
   public Scanner input;
   
   public LessonHandler(Scanner input) {
     this.input = input;
-    lessonList = new LessonList();
-
-  }
-  
-  public LessonHandler(Scanner input, int capacity) {
-    this.input = input;
-    lessonList = new LessonList(capacity);
-
+    this.lessons = new Lesson[LESSON_SIZE];
   }
 
   public void addLesson() {
@@ -46,15 +45,14 @@ public class LessonHandler {
 
     System.out.print("일수업시간? ");
     lesson.setDayHours(input.nextInt());
-    
     input.nextLine();
-    lessonList.add(lesson);
+    this.lessons[this.lessonCount++] = lesson;
     System.out.println("저장하였습니다.");
   }
 
   public  void listLesson() {
-    Lesson[] lessons = lessonList.toArray();
-    for (Lesson l : lessons) {
+    for (int i = 0; i < this.lessonCount; i++) {
+      Lesson l = this.lessons[i];
       System.out.printf("%d, %s, %s ~ %s, %d\n", 
           l.getNo(), l.getTitle(), l.getStartDate(), l.getEndDate(), l.getTotalHours());
     }
