@@ -4,7 +4,7 @@ public class Test02 {
   Test02() {
     this.x = 100;
     this.x = 200;
-    this.x - 300;
+    this.x = 300;
   }
 
   Test02(int a) {

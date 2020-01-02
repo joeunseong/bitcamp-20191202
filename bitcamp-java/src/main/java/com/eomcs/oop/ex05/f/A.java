@@ -13,7 +13,6 @@ public class A /*extends Object*/ {
         //    컴파일러는 자동으로 수퍼 클래스를 java.lang.Object 클래스로 지정한다.
         // => 그래서 자바의 모든 클래스는 반드시 수퍼 클래스가 있으며,
         //    자바의 모든 클래스는 java.lang.Object의 자손 클래스가 된다.
-        
         System.out.println("A() 생성자!");
     }
 }
