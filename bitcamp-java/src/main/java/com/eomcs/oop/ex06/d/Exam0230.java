@@ -26,8 +26,9 @@ public class Exam0230 {
     public int hashCode() {
       // 가장 간단한 방법은 모든 값을 문자열로 만들어 붙인 다음에
       // String 클래스에 있는 hashCode()를 사용하는 것이다.
-      // 왜? String 클래스에 있는 hashCode()는 문자열이 같은 경우 
-      //     같은 해시 값을 리턴하도록 이미 오버라이딩 되어 있기 때문이다.
+      // 왜? 
+      // String 클래스에 있는 hashCode()는 문자열이 같은 경우 
+      // 같은 해시 값을 리턴하도록 이미 오버라이딩 되어 있기 때문이다.
       String value = String.format("%s,%d,%d,%d,%d,%.1f", 
           this.name, this.kor, this.eng, this.math,
           this.sum, this.aver);

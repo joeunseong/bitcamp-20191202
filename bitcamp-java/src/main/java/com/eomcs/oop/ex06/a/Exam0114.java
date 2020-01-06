@@ -28,6 +28,7 @@ public class Exam0114 {
     c2.capacity = 5;  // Vehicle의 인스턴스 변수
     c2.cc = 890;      // Car의 인스턴스 변수
     c2.valve = 16;    // Car의 인스턴스 변수
+    ((Sedan)c).sunroof = true; 
   }
 
 }
