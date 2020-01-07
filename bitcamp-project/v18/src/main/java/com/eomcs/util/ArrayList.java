@@ -1,9 +1,10 @@
-package com.eomcs.lms.handler;
+package com.eomcs.util;
 
 import java.util.Arrays;
 import com.eomcs.lms.domain.Board;
 
-public class ArrayList {
+public class ArrayList<E> {
+  
   static final int DEFAULT_CAPACITY = 3;
 
   Object[] list;
@@ -19,19 +20,29 @@ public class ArrayList {
     else
       this.list = new Object[capacity];
   }
-
-  public Object[] toArray() {
-    /*
-    Board[] arr = new Board[this.size];
-    for (int i = 0; i < this.size; i++) {
-      arr[i] = this.list[i];
+  
+  @SuppressWarnings({"unchecked"})
+  public E[] toArray(E[] arr) {
+    // copyOf() 메소드야,
+    // arrayType 에 지정된 배열을 size 만큼 만들어라.
+    // 그리고 list 배열에 저장된 주소를 새로 만든 배열에 복사하라.
+    // 마지막으로 새로 만든 배열의 주소를 리턴하라!
+    //return (E[]) Arrays.copyOf(this.list, this.size, arrayType);
+    if(arr.length < this.size) {
+      return (E[]) Arrays.copyOf(this.list, this.size, arr.getClass());
     }
-        return arr;
+    System.arraycopy(this.list, 0, arr, 0, this.size);
+    /*
+    // 위의 arraycopy()는 다음 코드와 같다.
+    for(int i = 0; i <this.size; i++) {
+      arr[i] = (E) this.list[i];
+    }
     */
-    return Arrays.copyOf(this.list, this.size);
+    
+    return arr;
   }
 
-  public void add(Object obj) {
+  public void add(E obj) {
     if (this.size == this.list.length) {
       // 현재 배열의 게시글 객체가 꽉 찼으면, 배열을 늘린다.
       int oldCapacity = this.list.length;
@@ -50,11 +61,17 @@ public class ArrayList {
     this.list[this.size++] = obj;
   }
 
-  public Object get(int idx) {
+  @SuppressWarnings("unchecked")
+  public E get(int idx) {
    if(idx >= 0 && idx < this.size) {
-     return this.list[idx];
+     return (E)this.list[idx];
    } else {
     return null;
    }
+  }
+  
+  public int size() {
+    return this.size;
+    
   }
 }

@@ -10,7 +10,7 @@ public class App {
   static Scanner keyboard = new Scanner(System.in);
 
   public static void main(String[] args) {
-
+    
     BoardHandler boardHandler = new BoardHandler(keyboard);
     LessonHandler lessonHandler = new LessonHandler(keyboard);
     MemberHandler memberHandler = new MemberHandler(keyboard);
@@ -24,7 +24,7 @@ public class App {
         case "/lesson/add":
           lessonHandler.addLesson();
           break;
-
+          
         case "/lesson/list":
           lessonHandler.listLesson();
           break;
@@ -47,14 +47,6 @@ public class App {
 
         case "/board/detail":
           boardHandler.detailBoard();
-          break;
-
-        case "/board/update":
-          boardHandler.updateBoard();
-          break;
-          
-        case "/board/delete":
-          boardHandler.deleteBoard();
           break;
 
         default:
