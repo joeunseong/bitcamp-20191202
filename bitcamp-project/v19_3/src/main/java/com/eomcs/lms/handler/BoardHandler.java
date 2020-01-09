@@ -3,19 +3,24 @@ package com.eomcs.lms.handler;
 import java.sql.Date;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.util.ArrayList;
-import com.eomcs.util.LinkedList;
 import com.eomcs.util.Prompt;
 
 public class BoardHandler {
 
-  LinkedList<Board> boardList;
+  ArrayList<Board> boardList;
 
   public Prompt prompt;
 
 
   public BoardHandler(Prompt prompt) {
     this.prompt = prompt;
-    this.boardList = new LinkedList<Board>();
+    this.boardList = new ArrayList<Board>();
+
+  }
+
+  public BoardHandler(Prompt prompt, int capacity) {
+    this.prompt = prompt;
+    boardList = new ArrayList<>(capacity); // <>안에 Board를 안적어줘도 기본으로 설정됨
 
   }
 

@@ -4,19 +4,23 @@ package com.eomcs.lms.handler;
 
 import com.eomcs.lms.domain.Lesson;
 import com.eomcs.util.ArrayList;
-import com.eomcs.util.LinkedList;
 import com.eomcs.util.Prompt;
 
 public class LessonHandler {
-  LinkedList<Lesson> lessonList;
+  ArrayList<Lesson> lessonList;
 
   public Prompt prompt;
 
   public LessonHandler(Prompt prompt) {
     this.prompt = prompt;
-    lessonList = new LinkedList<>();
+    lessonList = new ArrayList<>();
   }
-  
+
+  public LessonHandler(Prompt prompt, int capacity) {
+    this.prompt = prompt;
+    lessonList = new ArrayList<>(capacity);
+  }
+
   public void addLesson() {
     Lesson lesson = new Lesson();
 
@@ -76,6 +80,9 @@ public class LessonHandler {
     }
 
     Lesson oldLesson = this.lessonList.get(index);
+
+    boolean changed = false;
+    String inputStr = null;
     Lesson newLesson = new Lesson();
     newLesson.setNo(oldLesson.getNo());
 

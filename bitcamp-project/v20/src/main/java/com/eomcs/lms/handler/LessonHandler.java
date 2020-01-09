@@ -76,6 +76,9 @@ public class LessonHandler {
     }
 
     Lesson oldLesson = this.lessonList.get(index);
+
+    boolean changed = false;
+    String inputStr = null;
     Lesson newLesson = new Lesson();
     newLesson.setNo(oldLesson.getNo());
 
