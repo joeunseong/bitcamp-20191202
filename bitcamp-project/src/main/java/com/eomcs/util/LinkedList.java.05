@@ -21,7 +21,6 @@ public class LinkedList {
       last.next = newNode;
       last = newNode;
     }
-    
     this.size++;
   }
   

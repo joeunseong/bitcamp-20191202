@@ -13,9 +13,9 @@ public class Exam0110 {
       System.out.println(s1 != s2); //true
 
 
-    // string constant pool 메모리 영역에 String 인스턴스를 생성하는 방법
+    // string constant pool(상수풀) 메모리 영역에 String 인스턴스를 생성하는 방법
     String x1 = "Hello"; // String 인스턴스의 주소를 리턴한다.
-    String x2 = "Hello"; // 기존의 String 인스턴스 주소를 리턴한다.
+    String x2 = "Hello"; // x2가 새로 생기지 않고 기존의 String 인스턴스 주소를 리턴한다.
     
     // 문자열 리터럴은 내부적으로 new String()을 실행한
     // => 다만 인스턴스를 Heap이 아닌 String 상수풀에 생성한다.

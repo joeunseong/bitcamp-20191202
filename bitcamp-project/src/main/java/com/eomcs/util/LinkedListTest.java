@@ -11,7 +11,7 @@ public class LinkedListTest {
     list.add("eee");
     list.add("fff");
     list.add("ggg");
-
+    
     System.out.println(list.set(0, "xxx"));
     System.out.println();
     print(list);
