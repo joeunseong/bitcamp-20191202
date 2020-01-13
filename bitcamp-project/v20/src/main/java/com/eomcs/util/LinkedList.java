@@ -1,7 +1,5 @@
 package com.eomcs.util;
 
-import java.lang.reflect.Array;
-
 public class LinkedList<E> {
 
   Node<E> first;
@@ -112,7 +110,6 @@ public class LinkedList<E> {
   
   @SuppressWarnings("unchecked")
   public E[] toArray(E[] arr) {
-
     if(arr.length < size) {
       arr = (E[]) Array.newInstance(arr.getClass().getComponentType(), size);
     }

@@ -16,6 +16,8 @@ public class Exam0141 {
     // => String 클래스는 toString()을 오버라이딩 했기 때문에
     //    결국 obj.toString()은 String 클래스에서 오버라이딩 한 toString()을 호출하는 것이다.
     System.out.println(x1 == x2);
+    System.out.println(x2);
+    System.out.println(x1);
   }
 }
 

@@ -5,7 +5,7 @@ public class Exam0131 {
   public static void main(String[] args) {
 
     // StringBuffer는 mutable 객체이다. 
-    // 인스턴스의 데이터를 변경할 숭 있다.
+    // 인스턴스의 데이터를 변경할 수 있다.
     // 원래의 문자열을 변경하고 싶을 때 사용하는 클래스이다.
     //
     StringBuffer buf = new StringBuffer("Hello");

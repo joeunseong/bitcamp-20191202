@@ -10,6 +10,15 @@ public class Exam0221 {
   static class B2 extends A {}
   static class C extends B1 {}
   
+  /*
+   *   Object
+   *     |
+   *     A
+   *    / \
+   *   B1 B2
+   *   |
+   *   C
+   */
   
   public static void main(String[] args) {
     // m1(ArrayList<Object>)

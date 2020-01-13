@@ -49,7 +49,7 @@ public class Exam0113 {
     // 즉 다음 코드는 box1 = new Box<Object>(); 와 같다.
     //
     // box1 = new Box();
-
+    
     // 메소드를 사용할 때 그 타입 전용 클래스인 것처럼 쓰면 된다.
     box1.set(new Member("홍길동", 20));
 

@@ -7,10 +7,13 @@ public class Exam0140 {
     System.out.println(s1);
     System.out.println(s1.toString());
 
-    String s2 = s1.toString(); // s1이 String이기 때문에
+    String s2 = s1.toString(); 
+    // s1이 String이기 때문에
     // toString()은 따로 String을 만들지 않고
     // 그냥 s1 주소를 리턴한다.
     System.out.println(s1 == s2);
+    System.out.println(s2);
+    System.out.println(s1);
   }
 }
 

@@ -20,7 +20,7 @@ public class Exam0210 {
     // primitive data를 포장하는 객체라고 해서
     // "랩퍼(wrapper) 클래스"라 부른다.
 
-    // 래퍼 클래스의 주요 용ㄷ:
+    // 래퍼 클래스의 주요 용도:
     // => primitive data type의 값을 객체로 주고 받을 때 사용한다.
     // => primitive data type의 값을 객체에 담아 전달하고 싶다면
     // 언제든 wrapper 클래스의 인스턴스를 만들면 된다.

@@ -31,7 +31,6 @@ public class Exam0223 {
     obj = i;
     
     Integer obj2 = (Integer) obj;
-    
     System.out.println(i);
     System.out.println(obj);
     

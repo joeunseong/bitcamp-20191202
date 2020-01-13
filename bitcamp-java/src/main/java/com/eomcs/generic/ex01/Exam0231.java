@@ -11,6 +11,15 @@ public class Exam0231 {
     static class B1 extends A {}
     static class B2 extends A {}
     static class C extends B1 {}
+    /*
+     *   Object
+     *     |
+     *     A
+     *    / \
+     *   B1 B2
+     *   |
+     *   C
+     */
 
   public static void main(String[] args) {
     ArrayList<B1> list1 = new ArrayList<>();

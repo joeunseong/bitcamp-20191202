@@ -10,6 +10,7 @@ public class Exam0142 {
     // obj를 통해 원래 인스턴스를 호출하고 싶다면
     // 다음과 같이 원래 타입으로 형변환하라!
     String s = ((String) obj).toLowerCase();
+
     System.out.println(s);
     
     // 또는 다음과 같이 원래 타입의레퍼런스에 저장한 다음 사용하라.

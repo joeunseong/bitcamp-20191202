@@ -5,15 +5,20 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Exam0222 {
-  static class A {
-  }
-  static class B1 extends A {
-  }
-  static class B2 extends A {
-  }
-  static class C extends B1 {
-  }
+  static class A {}
+  static class B1 extends A {}
+  static class B2 extends A {}
+  static class C extends B1 {}
 
+  /*
+   *   Object
+   *     |
+   *     A
+   *    / \
+   *   B1 B2
+   *   |
+   *   C
+   */
 
   public static void main(String[] args) {
     // m1(ArrayList<?>)
