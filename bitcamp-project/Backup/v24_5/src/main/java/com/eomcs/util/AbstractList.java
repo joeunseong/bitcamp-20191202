@@ -17,7 +17,7 @@ public abstract class AbstractList<E> implements List<E> {
       this 사용
       로컬 변수
       로컬(중첩) 클래스{
-         바깥 클래스.this 사용  (클래스의 멤버가 아니라 메소드의 멤버라 안됨)
+         바깥 클래스.this 사용 
          로컬 변수 접근 가능
     }
     중첩클래스 {
@@ -34,8 +34,7 @@ public abstract class AbstractList<E> implements List<E> {
     // 로컬 클래스는 인스턴스 멤버가 아니기 때문에 
     // 앞쪽에 인스턴스 주소를 전달해서는 안된다.
     // 즉 this. 을 붙여서는 안된다.(this를 붙이면 바깥의 인스턴스를 찾기 때문에)
-    return new Iterator<E>() { // 수퍼클래스 아니면 인터페이스
-      
+    return new Iterator<E>() { // 인터페이스가 없으면 수퍼클래스 
       List<E> list;
       int cursor;
       
