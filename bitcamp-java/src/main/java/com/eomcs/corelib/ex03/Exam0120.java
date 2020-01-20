@@ -10,15 +10,12 @@ public class Exam0120 {
     list.add("bbb"); // aaa, bbb,
     list.add("ccc"); // aaa, bbb, ccc,
     list.add("ddd"); // aaa, bbb, ccc, ddd,
-
     print(list); 
 
     list.remove(2); // aaa, bbb, ddd,
-
     print(list); 
 
     list.remove(0); // bbb, ddd,
-
     print(list);
 
     // 유효한 인덱스가 아니면 예외 발생시킨다!

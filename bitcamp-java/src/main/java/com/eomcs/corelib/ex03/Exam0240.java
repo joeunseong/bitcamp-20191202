@@ -37,9 +37,8 @@ public class Exam0240 {
         return false;
       return true;
     }
-
-
   }
+  
   public static void main(String[] args) {
     Member s1 = new Member("홍길동", 20);
     Member s2 = new Member("임꺽정", 30);

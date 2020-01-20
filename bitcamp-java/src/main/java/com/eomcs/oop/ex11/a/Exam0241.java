@@ -54,7 +54,7 @@ class Musics2 {
   }
 
   public Player createPlayer() {
-    // return this.new Player(); // this를 생략할 수 있다.
+    //return this.new Player(); // this를 생략할 수 있다.
     return new Player();
   }
 
