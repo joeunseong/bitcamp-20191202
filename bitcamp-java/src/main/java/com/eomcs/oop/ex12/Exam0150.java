@@ -14,7 +14,7 @@ public class Exam0150 {
     c1 = (a, b) -> {return a + b;};
     System.out.println(c1.compute(200, 100));
     
-    // 리턴 값이 있는 경우 중괄호를 생랴갛ㄹ 때 return 키워드도 함께 생략해야 한다.
+    // 리턴 값이 있는 경우 중괄호를 생략할 때 return 키워드도 함께 생략해야 한다.
     // c1 = (a, b) -> return a + b;
     // System.out.println(c1.compute(200, 100));
     

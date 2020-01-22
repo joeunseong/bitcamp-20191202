@@ -11,6 +11,7 @@ public class Exam0410x {
     // 로컬 클래스
     return money -> money + (money * rate / 100);
 
+
   }
 
   public static void main(String[] args) {

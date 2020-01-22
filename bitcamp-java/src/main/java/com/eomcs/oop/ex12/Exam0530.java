@@ -1,8 +1,6 @@
 // 메소드 레퍼런스 - 스태틱 메소드 레퍼런스
 package com.eomcs.oop.ex12;
 
-
-
 public class Exam0530 {
   static class MyCalculator {
     public static int plus(int a, int b) {

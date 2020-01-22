@@ -8,7 +8,7 @@ public class Exam0120 {
   }
 
   public static void main(String[] args) {
-    // 메솓의 몸체에 한 문장만 있을 때 중괄호 생략할 수 있다.
+    // 메소드의 몸체에 한 문장만 있을 때 중괄호 생략할 수 있다.
     Player p1 = () -> System.out.println("Hello!");
     p1.play();
 

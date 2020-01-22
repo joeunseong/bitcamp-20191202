@@ -3,7 +3,7 @@ package com.eomcs.oop.ex12;
 
 public class Exam0240 {
 
-// 추상 메소드 한 개짜리인터페이스만 가능!
+// 추상 메소드 한 개짜리 인터페이스만 가능!
   static abstract class Player {
     public abstract void play();
   }

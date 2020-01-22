@@ -18,8 +18,6 @@ public class Exam0610 {
     double compute(int money);
   }
   
-  
-  
   public static void main(String[] args) {
     // 메소드 한 개짜리 인터페이스의 구현체를 만들 때
     // 기존 인스턴스 메소드를 람다 구현체로 사용할 수 있다.
