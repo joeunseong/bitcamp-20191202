@@ -1,7 +1,7 @@
 // Exception 예외 던지고 받기
 package com.eomcs.exception.ex4;
 
-public class Exam0210 {
+public class Exam0120 {
 
   static void m1() throws Exception {
     // m2()와 같다. 
@@ -39,7 +39,8 @@ public class Exam0210 {
 
     // Exception 계열의 예외를 상위 호출자에게 전달하려면,
     // 그 호출 경로에 있는 모든 메서드에 throws 문장을 선언해야 하는 버거로움이 있다.
-    // 어쩔 수 없다! 무조건 선언해야 한다.
+    // 어쩔 수 없다! 
+    // 무조건 선언해야 한다.
   }
 
 }
