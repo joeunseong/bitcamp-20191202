@@ -6,15 +6,14 @@ import java.sql.SQLException;
 
 public class Exam0410 {
 
-  static void m(int i) 
-      throws Exception, RuntimeException, SQLException, IOException {
+  static void m(int i) throws Exception, RuntimeException, SQLException, IOException {
     if (i == 0)
       throw new Exception();
     else if (i == 1)
       throw new RuntimeException();
-    else if (i == 2) 
+    else if (i == 2)
       throw new SQLException();
-    else 
+    else
       throw new IOException();
   }
 

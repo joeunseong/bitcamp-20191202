@@ -34,6 +34,7 @@ import com.eomcs.util.Prompt;
 public class App {
 
   static Scanner keyboard = new Scanner(System.in);
+
   static Deque<String> commandStack = new ArrayDeque<>();
   static Queue<String> commandQueue = new LinkedList<>();
 
@@ -51,20 +52,22 @@ public class App {
 
     ArrayList<Lesson> lessonList = new ArrayList<>();
     commandMap.put("/lesson/add", new LessonAddCommand(prompt, lessonList));
-    commandMap.put("/lesson/delete", new LessonDeleteCommand(prompt, lessonList));
-    commandMap.put("/lesson/detail", new LessonDetailCommand(prompt, lessonList));
     commandMap.put("/lesson/list", new LessonListCommand(lessonList));
+    commandMap.put("/lesson/detail", new LessonDetailCommand(prompt, lessonList));
     commandMap.put("/lesson/update", new LessonUpdateCommand(prompt, lessonList));
+    commandMap.put("/lesson/delete", new LessonDeleteCommand(prompt, lessonList));
 
     LinkedList<Member> memberList = new LinkedList<>();
     commandMap.put("/member/add", new MemberAddCommand(prompt, memberList));
-    commandMap.put("/member/delete", new MemberDeleteCommand(prompt, memberList));
-    commandMap.put("/member/detail", new MemberDetailCommand(prompt, memberList));
     commandMap.put("/member/list", new MemberListCommand(memberList));
+    commandMap.put("/member/detail", new MemberDetailCommand(prompt, memberList));
     commandMap.put("/member/update", new MemberUpdateCommand(prompt, memberList));
+    commandMap.put("/member/delete", new MemberDeleteCommand(prompt, memberList));
 
     commandMap.put("/hello", new HelloCommand(prompt));
     commandMap.put("/compute/plus", new ComputePlusCommand(prompt));
+
+
     String command;
 
     while (true) {
@@ -93,7 +96,7 @@ public class App {
 
       if (commandHandler != null) {
         try {
-          commandHandler.excute();
+          commandHandler.execute();
         } catch (Exception e) {
           System.out.printf("명령어 실행 중 오류 발생: %s\n", e.getMessage());
         }
@@ -101,12 +104,18 @@ public class App {
         System.out.println("실행할 수 없는 명령입니다.");
       }
     }
+
     keyboard.close();
   }
 
+  // 이전에는 Stack에서 값을 꺼내는 방법과 Queue에서 값을 꺼내는 방법이 다르기 때문에
+  // printCommandHistory()와 printCommandHistory2() 메서드를 따로 정의했다.
+  // 이제 Stack과 Queue는 일관된 방식으로 값을 꺼내주는 Iterator가 있기 때문에
+  // 두 메서드를 하나로 합칠 수 있다.
+  // 파라미터로 Iterator를 받아서 처리하기만 하면 된다.
+  //
   private static void printCommandHistory(Iterator<String> iterator) {
     int count = 0;
-
     while (iterator.hasNext()) {
       System.out.println(iterator.next());
       count++;
@@ -120,4 +129,7 @@ public class App {
       }
     }
   }
+
 }
+
+

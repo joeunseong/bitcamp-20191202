@@ -1,31 +1,49 @@
-# 27 - 예외가 발생했을 때 시스템을 멈추지 않게 하는 방법
+# 28_3 - 파일 포맷으로 JSON 도입하기
 
-## 학습목표
+## 학습 목표 
 
-- 예외 처리 문법을 사용할 수 있다.
-- 예외 처리 문법의 존재 의의 사용법을 한다.
+- JSON 포맷을 사용 이점을 이해한다.
+- Google JSON 라이브러리를 사용할 수 있다.
 
+## JSON 데이터 포맷 특징
+
+- 문자열로 데이터 형식를 표현한다.
+- 
+- 문자열이기 때문에 모든 프로그래밍 언어에서 다룰 수 있다.
+- 바이너리 방식에 대해 데이터가 커지는 문제가 있지만,
+ 
 ## 실습 소스 및 결과
-- src/main/java/com/eomcs/lms/App.java 변경
 
+- build.gradle 변경
+- src/main/java/com/eomcs/lms/App.java 변경
 ## 실습  
 
-### 훈련 1: 명령어 실행 중 오류가 발생하더라도 시스템이 멈추지 않고 계속 실행되게 하라.
+### 훈련 1: Gradle 스크립트 파일(build.gradle)에 Google JSON 라이브러리를 추가하라
+
+- mvnrepository.com 에서 라이브러리 검색
+  - json.org 사이트에서 자바 라이브러리 확인
+  - 'gson' 키워드로 검색
+- build.gradle 을 편집한다.
+  - 의존 라이브러리 블록(dependencies {})에 gson 정보를 추가한다.
+- 이클립스 설정 파일을 갱신한다.
+  - 'gradle eclipse' 를 실행
+  - 이클립스에서 해당 프로젝트를 'refresh' 한다.
+  - 'Referenced Libraries' 노드에서 gson 라이브러리 파일이 추가된 것을 확인한다.
+  
+### 훈련 2: 게시물 데이터를 저장하고 읽을 때 JSON 형식을 사용하라.
 
 - App.java
-    - 명령을 처리하는 코드를 try ~ catch ~ 블록으로 묶는다.
+  - saveBoardData()를 변경한다.
+  - loadBoardData()를 변경한다.
+  
+### 훈련 3: 회원 데이터를 저장하고 읽을 때 JSON 형식을 사용하라.
 
-#### 실행 결과
+- App.java
+  - saveMemberData()를 변경한다.
+  - loadMemberData()를 변경한다.
+  
+### 훈련 4: 게시물 데이터를 저장하고 읽을 때 JSON 형식을 사용하라.
 
-다음과 같이 잘못된 형식으로 값을 입력하더라도 시스템을 멈추지 않고 계속 실행한다.
-```
-명령> /lesson/add
-번호? 1
-수업명? 자바 기초
-설명? 자바 기초 문법을 배운다.
-시작일? 2019-1-1
-종료일? 20195-5
-명령어 실행 중 오류 발생 : java.lang.IllegalArgumentException
-
-명령> 
-```
+- App.java
+  - saveBoardData()를 변경한다.
+  - loadBoardData()를 변경한다.

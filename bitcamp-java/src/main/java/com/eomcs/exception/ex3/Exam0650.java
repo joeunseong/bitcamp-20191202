@@ -19,7 +19,7 @@ public class Exam0650 {
         // A 클래스는 AutoCloseable 구현체가 아니기 때문에 여기에 선언할 수 없다.
         // A obj = new A(); // 컴파일 오류!
 
-        obj2 = new B(); //  컴파일 오류!
+         obj2 = new B(); //  컴파일 오류!
         // 변수 선언은 반드시 괄호 안에 해야 한다.
     ) {
       System.out.println("try 블록 실행...");
