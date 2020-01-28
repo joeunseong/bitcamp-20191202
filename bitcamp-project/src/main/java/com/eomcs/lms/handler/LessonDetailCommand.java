@@ -5,22 +5,27 @@ import com.eomcs.lms.domain.Lesson;
 import com.eomcs.util.Prompt;
 
 public class LessonDetailCommand implements Command {
+
   List<Lesson> lessonList;
-  public Prompt prompt;
+
+  Prompt prompt;
 
   public LessonDetailCommand(Prompt prompt, List<Lesson> list) {
     this.prompt = prompt;
-    lessonList = list;
+    this.lessonList = list;
   }
 
   @Override
   public void excute() {
-    int index = indexOfLesson(prompt.inputInt("번호"));
+    int index = indexOfLesson(prompt.inputInt("번호? "));
+
     if (index == -1) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("해당 번호의 수업이 없습니다.");
       return;
     }
+
     Lesson lesson = this.lessonList.get(index);
+
     System.out.printf("번호: %d\n", lesson.getNo());
     System.out.printf("수업명: %s\n", lesson.getTitle());
     System.out.printf("설명: %s\n", lesson.getDescription());
@@ -39,3 +44,5 @@ public class LessonDetailCommand implements Command {
     return -1;
   }
 }
+
+

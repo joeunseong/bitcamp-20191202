@@ -5,23 +5,28 @@ import com.eomcs.lms.domain.Lesson;
 import com.eomcs.util.Prompt;
 
 public class LessonDeleteCommand implements Command {
+
   List<Lesson> lessonList;
-  public Prompt prompt;
+
+  Prompt prompt;
 
   public LessonDeleteCommand(Prompt prompt, List<Lesson> list) {
     this.prompt = prompt;
-    lessonList = list;
+    this.lessonList = list;
   }
 
   @Override
   public void excute() {
-    int index = indexOfLesson(prompt.inputInt("번호"));
+    int index = indexOfLesson(prompt.inputInt("번호? "));
+
     if (index == -1) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+      System.out.println("해당 번호의 수업이 없습니다.");
       return;
     }
+
     this.lessonList.remove(index);
-    System.out.println("해당 수업을 삭제했습니다.");
+
+    System.out.println("수업을 삭제했습니다.");
   }
 
   private int indexOfLesson(int no) {
@@ -33,3 +38,5 @@ public class LessonDeleteCommand implements Command {
     return -1;
   }
 }
+
+

@@ -3,6 +3,7 @@ package com.eomcs.lms.domain;
 import java.sql.Date;
 
 public class Lesson {
+
   private int no;
   private String title;
   private String description;
@@ -13,6 +14,7 @@ public class Lesson {
 
   public static Lesson valueOf(String csv) {
     String[] data = csv.split(",");
+
     Lesson lesson = new Lesson();
     lesson.setNo(Integer.parseInt(data[0]));
     lesson.setTitle(data[1]);
@@ -21,46 +23,65 @@ public class Lesson {
     lesson.setEndDate(Date.valueOf(data[4]));
     lesson.setTotalHours(Integer.parseInt(data[5]));
     lesson.setDayHours(Integer.parseInt(data[6]));
+
     return lesson;
   }
 
   public String toCsvString() {
-    return String.format("%d,%s,%s,%s,%s,%d,%d\n", this.getNo(), this.getTitle(),
+    return String.format("%d,%s,%s,%s,%s,%d,%d", this.getNo(), this.getTitle(),
         this.getDescription(), this.getStartDate(), this.getEndDate(), this.getTotalHours(),
         this.getDayHours());
   }
 
   @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + dayHours;
+    result = prime * result + ((description == null) ? 0 : description.hashCode());
+    result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
+    result = prime * result + no;
+    result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+    result = prime * result + ((title == null) ? 0 : title.hashCode());
+    result = prime * result + totalHours;
+    return result;
+  }
+
+  @Override
   public boolean equals(Object obj) {
-    if (obj.getClass() != Lesson.class) {
-      // 같은 Lesson클래스인데 같은 클래스는 한번만 로딩되기 때문에 무조건 같은 클래스이다
+    if (this == obj)
+      return true;
+    if (obj == null)
       return false;
-    }
-
+    if (getClass() != obj.getClass())
+      return false;
     Lesson other = (Lesson) obj;
-
-    if (this.no != other.no)
+    if (dayHours != other.dayHours)
       return false;
-
-    if (!this.title.equals(other.title))
+    if (description == null) {
+      if (other.description != null)
+        return false;
+    } else if (!description.equals(other.description))
       return false;
-
-    if (!this.description.equals(other.description))
+    if (endDate == null) {
+      if (other.endDate != null)
+        return false;
+    } else if (!endDate.equals(other.endDate))
       return false;
-
-    if (this.startDate.compareTo(other.startDate) != 0)
-      // compareTo는 두개를 비교해서 같으면 0 리턴
+    if (no != other.no)
       return false;
-
-    if (this.endDate.compareTo(other.endDate) != 0)
+    if (startDate == null) {
+      if (other.startDate != null)
+        return false;
+    } else if (!startDate.equals(other.startDate))
       return false;
-
-    if (this.totalHours != other.totalHours)
+    if (title == null) {
+      if (other.title != null)
+        return false;
+    } else if (!title.equals(other.title))
       return false;
-
-    if (this.dayHours != other.dayHours)
+    if (totalHours != other.totalHours)
       return false;
-
     return true;
   }
 
@@ -119,5 +140,6 @@ public class Lesson {
   public void setDayHours(int dayHours) {
     this.dayHours = dayHours;
   }
-
 }
+
+

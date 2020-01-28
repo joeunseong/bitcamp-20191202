@@ -1,16 +1,15 @@
-// "/board/detail" 명령 처리
-
 package com.eomcs.lms.handler;
 
 import java.util.List;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.util.Prompt;
 
+// "/board/detail" 명령 처리
 public class BoardDetailCommand implements Command {
 
   List<Board> boardList;
 
-  public Prompt prompt;
+  Prompt prompt;
 
   public BoardDetailCommand(Prompt prompt, List<Board> list) {
     this.prompt = prompt;
@@ -20,10 +19,12 @@ public class BoardDetailCommand implements Command {
   @Override
   public void excute() {
     int index = indexOfBoard(prompt.inputInt("번호? "));
+
     if (index == -1) {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
+
     Board board = this.boardList.get(index);
     System.out.printf("번호: %d\n", board.getNo());
     System.out.printf("제목: %s\n", board.getTitle());
@@ -39,4 +40,7 @@ public class BoardDetailCommand implements Command {
     }
     return -1;
   }
+
 }
+
+

@@ -1,16 +1,15 @@
-// "/board/delete" 명령 처리
-
 package com.eomcs.lms.handler;
 
 import java.util.List;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.util.Prompt;
 
+// "/board/delete" 명령 처리
 public class BoardDeleteCommand implements Command {
 
   List<Board> boardList;
 
-  public Prompt prompt;
+  Prompt prompt;
 
   public BoardDeleteCommand(Prompt prompt, List<Board> list) {
     this.prompt = prompt;
@@ -25,6 +24,7 @@ public class BoardDeleteCommand implements Command {
       System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
+
     this.boardList.remove(index);
 
     System.out.println("게시글을 삭제했습니다.");
@@ -38,4 +38,7 @@ public class BoardDeleteCommand implements Command {
     }
     return -1;
   }
+
 }
+
+

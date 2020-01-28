@@ -3,6 +3,7 @@ package com.eomcs.lms.domain;
 import java.sql.Date;
 
 public class Member {
+
   private int no;
   private String name;
   private String email;
@@ -13,6 +14,7 @@ public class Member {
 
   public static Member valueOf(String csv) {
     String[] data = csv.split(",");
+
     Member member = new Member();
     member.setNo(Integer.parseInt(data[0]));
     member.setName(data[1]);
@@ -26,16 +28,27 @@ public class Member {
   }
 
   public String toCsvString() {
-    return String.format("%d,%s,%s,%s,%s,%s,%s\n", this.getNo(), this.getName(), this.getEmail(),
+    return String.format("%d,%s,%s,%s,%s,%s,%s", this.getNo(), this.getName(), this.getEmail(),
         this.getPassword(), this.getPhoto(), this.getTel(), this.getRegisteredDate());
+  }
+
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((email == null) ? 0 : email.hashCode());
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result + no;
+    result = prime * result + ((password == null) ? 0 : password.hashCode());
+    result = prime * result + ((photo == null) ? 0 : photo.hashCode());
+    result = prime * result + ((registeredDate == null) ? 0 : registeredDate.hashCode());
+    result = prime * result + ((tel == null) ? 0 : tel.hashCode());
+    return result;
   }
 
   @Override
   public boolean equals(Object obj) {
-    if (obj.getClass() != Lesson.class) {
-      return false;
-    }
-
     if (this == obj)
       return true;
     if (obj == null)
@@ -133,7 +146,4 @@ public class Member {
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
-
-
-
 }

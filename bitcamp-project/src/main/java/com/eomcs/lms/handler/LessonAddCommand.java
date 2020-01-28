@@ -5,17 +5,20 @@ import com.eomcs.lms.domain.Lesson;
 import com.eomcs.util.Prompt;
 
 public class LessonAddCommand implements Command {
+
   List<Lesson> lessonList;
-  public Prompt prompt;
+
+  Prompt prompt;
 
   public LessonAddCommand(Prompt prompt, List<Lesson> list) {
     this.prompt = prompt;
-    lessonList = list;
+    this.lessonList = list;
   }
 
   @Override
   public void excute() {
     Lesson lesson = new Lesson();
+
     lesson.setNo(prompt.inputInt("번호? "));
     lesson.setTitle(prompt.inputString("수업명? "));
     lesson.setDescription(prompt.inputString("설명? "));
@@ -23,7 +26,11 @@ public class LessonAddCommand implements Command {
     lesson.setEndDate(prompt.inputDate("종료일? "));
     lesson.setTotalHours(prompt.inputInt("총수업시간? "));
     lesson.setDayHours(prompt.inputInt("일수업시간? "));
+
     lessonList.add(lesson);
+
     System.out.println("저장하였습니다.");
   }
 }
+
+

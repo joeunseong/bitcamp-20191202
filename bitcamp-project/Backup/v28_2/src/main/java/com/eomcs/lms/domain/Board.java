@@ -20,7 +20,6 @@ public class Board {
     board.setDate(Date.valueOf(data[2]));
     board.setViewCount(Integer.parseInt(data[3]));
     board.setWriter(data[4]);
-
     return board;
   }
 
