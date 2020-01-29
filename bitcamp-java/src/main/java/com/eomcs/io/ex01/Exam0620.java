@@ -6,7 +6,6 @@ import java.io.FileFilter;
 
 public class Exam0620 {
 
-
   public static void main(String[] args) throws Exception {
 
     class JavaFilter implements FileFilter {
@@ -37,9 +36,7 @@ public class Exam0620 {
       System.out.printf("%s %12d %s\n", file.isDirectory() ? "d" : "-", file.length(),
           file.getName());
     }
-
   }
-
 }
 
 
