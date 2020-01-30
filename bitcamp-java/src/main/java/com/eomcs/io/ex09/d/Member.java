@@ -6,7 +6,7 @@ package com.eomcs.io.ex09.d;
 //    단지 Serialize를 활성화시키는 기능을 수행한다.
 // => 이 인터페이스를 구현한 객체만 ObjectInputStream/ObjectOutputStream으로
 //    serivalize/deserialize 할 수 있다.
-public class Member implements java.io.Serializable {// Serializable 할 수 있다고 나타내기 위해 씀
+public class Member implements java.io.Serializable {
   
   // java.io.Serializable 인터페이스를 구현하는 클래스는
   // 항상 serialVersionUID 라는 스티틱 상수를 가져야 한다.
