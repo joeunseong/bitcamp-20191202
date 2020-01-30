@@ -5,8 +5,8 @@ package com.eomcs.io.ex09.c;
 // => Serializable 인터페이스는 아무런 메서드가 정의되어 있지 않다.
 //    단지 Serialize를 활성화시키는 기능을 수행한다.
 // => 이 인터페이스를 구현한 객체만 ObjectInputStream/ObjectOutputStream으로
-//    serivalize/deserialize 할 수 있다.
-public class Member implements java.io.Serializable {// Serializable 할 수 있다고 나타내기 위해 씀
+//    serialize/deserialize  할 수 있다.
+public class Member implements java.io.Serializable {
   String name;
   int age;
   boolean gender; // true(여자), false(남자)

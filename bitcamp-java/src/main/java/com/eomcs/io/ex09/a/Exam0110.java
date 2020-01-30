@@ -38,8 +38,8 @@ public class Exam0110 {
 // 1) byte(binary) stream class
 // - 입력: InputStream
 //   - data sink stream class
-//     - 실제 데이터가 저장하고 꺼내는 일을 한다)
-//     - 예) FileInputStream(파일에서), ByteArrayInputStream(메모리에서), PipedInputStream(다른 프로그램의 표준 입력 장치로)
+//     - 실제 데이터가 저장하고 꺼내는 일을 한다
+//     - 예) FileInputStream(파일에서), ByteArrayInputStream(메모리에서), PipedInputStream(다른 프로그램의 표준 입력 장치에서)
 //   - data processing stream class(=decorator)
 //     - 데이터를 중간에서 가공하는 일을 한다.
 //     - 예) BufferedInputStream, DataInputStream, ObjectInputStream
