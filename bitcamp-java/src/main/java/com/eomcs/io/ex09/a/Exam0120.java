@@ -1,13 +1,16 @@
-// DataOutputStream을 이용하여 객체 출력 - 버퍼 사용 전
-package com.eomcs.io.ex09;
+// Java I/O API 사용하기 - BufferedOutputStream
+package com.eomcs.io.ex09.a;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 
-public class Exam0110 {
+public class Exam0120 {
 
   public static void main(String[] args) throws Exception {
-    FileOutputStream fileOut = new FileOutputStream("temp/test8.data");
-    DataOutputStream out = new DataOutputStream(fileOut);
+    FileOutputStream fileOut = new FileOutputStream("temp/test10.data");
+    BufferedOutputStream bufOut = new BufferedOutputStream(fileOut);
+    DataOutputStream out = new DataOutputStream(bufOut);
 
     Member member = new Member();
     member.name = "AB가각간";
@@ -18,7 +21,7 @@ public class Exam0110 {
     long startTime = System.currentTimeMillis();
 
     for (int i = 0; i < 100000; i++) {
-      out.writeUTF(member.name); 
+      out.writeUTF(member.name);
       out.writeInt(member.age);
       out.writeBoolean(member.gender);
     }
