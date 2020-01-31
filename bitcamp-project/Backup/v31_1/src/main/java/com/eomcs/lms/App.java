@@ -12,11 +12,14 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.Set;
+import com.eomcs.lms.context.ApplicationContextListener;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.domain.Member;
@@ -42,16 +45,48 @@ import com.eomcs.util.Prompt;
 
 public class App {
 
-  static Scanner keyboard = new Scanner(System.in);
+  Scanner keyboard = new Scanner(System.in);
 
-  static Deque<String> commandStack = new ArrayDeque<>();
-  static Queue<String> commandQueue = new LinkedList<>();
+  Deque<String> commandStack = new ArrayDeque<>();
+  Queue<String> commandQueue = new LinkedList<>();
 
-  static List<Lesson> lessonList = new ArrayList<>();
-  static List<Member> memberList = new ArrayList<>();
-  static List<Board> boardList = new ArrayList<>();
+  List<Lesson> lessonList = new ArrayList<>();
+  List<Member> memberList = new ArrayList<>();
+  List<Board> boardList = new ArrayList<>();
 
-  public static void main(String[] args) {
+  // 옵저버 목록을 관리할 객체 준비
+  // - 같은 인스턴스를 중복해서 등록하지 않도록 한다.
+  // - Set은 등록 순서를 따지지 않는다.
+  Set<ApplicationContextListener> listeners = new HashSet<>();
+
+  // 옵저버를 등록하는 메서드이다.
+  public void addApplicationContextListener(ApplicationContextListener listener) {
+    listeners.add(listener);
+  }
+
+  // 옵저버를 제거하는 메서드이다.
+  public void removeApplicationContextListener(ApplicationContextListener listener) {
+    listeners.remove(listener);
+  }
+
+  // 애플리케이션이 시작되면, 등록된 리스너에게 알린다.
+  private void notifyApplicationInitialized() {
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextInitialized();
+    }
+  }
+
+  // 애플리케이션이 종료되면, 등록된 리스너에게 알린다.
+  private void notifyApplicationDestroyed() {
+    for (ApplicationContextListener listener : listeners) {
+      listener.contextDestroyed();
+    }
+  }
+
+  public void service() {
+
+    notifyApplicationInitialized();
+
 
     // 파일에서 데이터 로딩
     loadLessonData();
@@ -111,7 +146,7 @@ public class App {
 
       if (commandHandler != null) {
         try {
-          commandHandler.excute();
+          commandHandler.execute();
         } catch (Exception e) {
           e.printStackTrace();
           System.out.printf("명령어 실행 중 오류 발생: %s\n", e.getMessage());
@@ -128,15 +163,11 @@ public class App {
     saveMemberData();
     saveBoardData();
 
-  } // main()
+    notifyApplicationDestroyed();
 
-  // 이전에는 Stack에서 값을 꺼내는 방법과 Queue에서 값을 꺼내는 방법이 다르기 때문에
-  // printCommandHistory()와 printCommandHistory2() 메서드를 따로 정의했다.
-  // 이제 Stack과 Queue는 일관된 방식으로 값을 꺼내주는 Iterator가 있기 때문에
-  // 두 메서드를 하나로 합칠 수 있다.
-  // 파라미터로 Iterator를 받아서 처리하기만 하면 된다.
-  //
-  private static void printCommandHistory(Iterator<String> iterator) {
+  } // service()
+
+  private void printCommandHistory(Iterator<String> iterator) {
     int count = 0;
     while (iterator.hasNext()) {
       System.out.println(iterator.next());
@@ -152,17 +183,13 @@ public class App {
     }
   }
 
-  private static void loadLessonData() {
-    // 데이터가 보관된 파일을 정보를 준비한다.
-    File file = new File("./lesson.ser");
+  @SuppressWarnings("unchecked")
+  private void loadLessonData() {
+    File file = new File("./lesson.ser2");
 
     try (ObjectInputStream in =
         new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
-      int size = in.readInt();
-      for (int i = 0; i < size; i++) {
-
-        lessonList.add((Lesson) in.readObject());
-      }
+      lessonList = (List<Lesson>) in.readObject();
       System.out.printf("총 %d 개의 수업 데이터를 로딩했습니다.\n", lessonList.size());
 
     } catch (Exception e) {
@@ -170,16 +197,12 @@ public class App {
     }
   }
 
-  private static void saveLessonData() {
-    // 데이터가 보관된 파일을 정보를 준비한다.
-    File file = new File("./lesson.ser");
+  private void saveLessonData() {
+    File file = new File("./lesson.ser2");
 
     try (ObjectOutputStream out =
         new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
-      out.writeInt(lessonList.size());
-      for (Lesson lesson : lessonList) {
-        out.writeObject(lesson); // 간편하지만 다른 프로그래밍 언어에서 읽어들일 수가 없음
-      }
+      out.writeObject(lessonList);
       System.out.printf("총 %d 개의 수업 데이터를 저장했습니다.\n", lessonList.size());
 
     } catch (IOException e) {
@@ -187,15 +210,13 @@ public class App {
     }
   }
 
-  private static void loadMemberData() {
-    File file = new File("./member.ser");
+  @SuppressWarnings("unchecked")
+  private void loadMemberData() {
+    File file = new File("./member.ser2");
 
     try (ObjectInputStream in =
         new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
-      int size = in.readInt();
-      for (int i = 0; i < size; i++) {
-        memberList.add((Member) in.readObject());
-      }
+      memberList = (List<Member>) in.readObject();
       System.out.printf("총 %d 개의 회원 데이터를 로딩했습니다.\n", memberList.size());
 
     } catch (Exception e) {
@@ -203,15 +224,12 @@ public class App {
     }
   }
 
-  private static void saveMemberData() {
-    File file = new File("./member.ser");
+  private void saveMemberData() {
+    File file = new File("./member.ser2");
 
     try (ObjectOutputStream out =
         new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
-      out.writeInt(memberList.size());
-      for (Member member : memberList) {
-        out.writeObject(member);
-      }
+      out.writeObject(memberList);
       System.out.printf("총 %d 개의 회원 데이터를 저장했습니다.\n", memberList.size());
 
     } catch (IOException e) {
@@ -219,16 +237,13 @@ public class App {
     }
   }
 
-  private static void loadBoardData() {
-    File file = new File("./board.ser");
+  @SuppressWarnings("unchecked")
+  private void loadBoardData() {
+    File file = new File("./board.ser2");
 
     try (ObjectInputStream in =
         new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)))) {
-      int size = in.readInt();
-      for (int i = 0; i < size; i++) {
-
-        boardList.add((Board) in.readObject());
-      }
+      boardList = (List<Board>) in.readObject();
       System.out.printf("총 %d 개의 게시물 데이터를 로딩했습니다.\n", boardList.size());
 
     } catch (Exception e) {
@@ -236,21 +251,23 @@ public class App {
     }
   }
 
-  private static void saveBoardData() {
-    File file = new File("./board.ser");
+  private void saveBoardData() {
+    File file = new File("./board.ser2");
 
     try (ObjectOutputStream out =
         new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
-      out.writeInt(boardList.size());
-      for (Board board : boardList) {
-        out.writeObject(board);
-      }
+      out.writeObject(boardList);
       System.out.printf("총 %d 개의 게시물 데이터를 저장했습니다.\n", boardList.size());
 
     } catch (IOException e) {
       System.out.println("파일 쓰기 중 오류 발생! - " + e.getMessage());
 
     }
+  }
+
+  public static void main(String[] args) {
+    App app = new App();
+    app.service();
   }
 }
 
