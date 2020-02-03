@@ -148,7 +148,7 @@ public class App {
 
       if (commandHandler != null) {
         try {
-          commandHandler.excute();
+          commandHandler.execute();
         } catch (Exception e) {
           e.printStackTrace();
           System.out.printf("명령어 실행 중 오류 발생: %s\n", e.getMessage());

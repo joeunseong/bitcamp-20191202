@@ -148,7 +148,7 @@ public class App {
 
       if (commandHandler != null) {
         try {
-          commandHandler.excute();
+          commandHandler.execute();
         } catch (Exception e) {
           e.printStackTrace();
           System.out.printf("명령어 실행 중 오류 발생: %s\n", e.getMessage());
@@ -185,7 +185,6 @@ public class App {
 
     // 애플리케이션의 상태를 정보를 받을 옵저버를 등록한다.
     app.addApplicationContextListener(new DataLoaderListener());
-    app.addApplicationContextListener(new GreetingListener());
 
     app.service();
   }
