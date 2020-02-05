@@ -18,8 +18,8 @@ public class LessonAddCommand implements Command {
 
   @Override
   public void execute() {
-    Lesson lesson = new Lesson();
 
+    Lesson lesson = new Lesson();
     lesson.setNo(prompt.inputInt("번호? "));
     lesson.setTitle(prompt.inputString("수업명? "));
     lesson.setDescription(prompt.inputString("설명? "));
