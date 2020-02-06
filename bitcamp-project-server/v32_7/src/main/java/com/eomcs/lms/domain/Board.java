@@ -1,19 +1,30 @@
 package com.eomcs.lms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Board {
+public class Board implements Serializable {
+
+  private static final long serialVersionUID = 20200131L;
   private int no;
   private String title;
   private Date date;
   private int viewCount;
   private String writer;
 
-  // CSV 포맷: 객체로 리턴
+  @Override
+  public String toString() {
+    return "Board [no=" + no + ", title=" + title + ", date=" + date + ", viewCount=" + viewCount
+        + ", writer=" + writer + "]";
+
+  }
+
+  // CSV 포맷:
   // - 번호,제목,등록일,조회수,작성자
   //
   public static Board valueOf(String csv) {
     String[] data = csv.split(",");
+
     Board board = new Board();
     board.setNo(Integer.parseInt(data[0]));
     board.setTitle(data[1]);
@@ -23,9 +34,20 @@ public class Board {
     return board;
   }
 
-  public String toCsvString() { // 객체를 문자열로 리턴
+  public String toCsvString() {
     return String.format("%d,%s,%s,%d,%s", this.getNo(), this.getTitle(), this.getDate(),
         this.getViewCount(), this.getWriter());
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + no;
+    result = prime * result + ((title == null) ? 0 : title.hashCode());
+    result = prime * result + viewCount;
+    result = prime * result + ((writer == null) ? 0 : writer.hashCode());
+    return result;
   }
 
   @Override
@@ -93,7 +115,5 @@ public class Board {
   public void setWriter(String writer) {
     this.writer = writer;
   }
-
-
 
 }

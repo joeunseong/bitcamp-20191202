@@ -1,22 +1,23 @@
-# 32_8 - DAO 클래스의 공통점을 뽑아 수퍼 클래스로 정의하기(generalization 수행하기)
+# 32_7 - 데이터 처리 코드를 별도의 클래스로 정의하여 객체화 시키기
 
 ## 학습목표
 
-- 상속에 기법 중 generalization을 이해한다.
-- generalization을 구현할 수 있다.
+- DAO(Data Access Object)의 역할과 이점을 이해한다.
+- 데이터 처리 코드를 DAO로 분리할 수 있다. 
 
-### 상속
+### DAO(Data Access Object)
 
-- specialization
-  - 수퍼 클래스를 상속 받아 특별한 기능을 수행하는 서브 클래스 만들기.
-- generalization 
-  - 클래스들의 공통점을 뽑아 수퍼 클래스로 만든 후에 상속 관계를 맺기.
+- 데이터 처리 역할을 수행하는 객체이다.
+- 데이터 처리 방식을 캡슐화(=추상화=클래스로 정의)하여 객체의 사용을 일관성 있게 만든다.
+  - 즉 데이터 처리 방식(배열, 스택, 큐, 맵, 파일, 데이터베이스 등)을 
+    클래스로 포장(캡슐화)하면 데이터 처리 방식에 상관없이 메소드 사용을 통일할 수 있다.
+ 
 
 ## 실습 소스 및 결과
 
-- src/main/java/com/eomcs/lms/dao/AbstractObjectFileDao.java 추가
-- src/main/java/com/eomcs/lms/dao/BoardObjectFileDao.java 변경
-- src/main/java/com/eomcs/lms/dao/LessonObjectFileDao.java 변경
+- src/main/java/com/eomcs/lms/dao 패키지 생성
+- src/main/java/com/eomcs/lms/dao/BoardObjectFileDao.java 추가
+- src/main/java/com/eomcs/lms/dao/LessonObjectFileDao.java 추가
 - src/main/java/com/eomcs/lms/dao/MemberObjectFileDao.java 추가
 - src/main/java/com/eomcs/lms/ServerApp.java 변경
 
