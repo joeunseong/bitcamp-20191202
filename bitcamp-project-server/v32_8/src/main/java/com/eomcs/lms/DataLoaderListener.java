@@ -36,6 +36,5 @@ public class DataLoaderListener implements ApplicationContextListener {
 
     // 애플리케이션이 종료되면 이 메서드가 호출될 것이고,
     // 이 메서드에서는 애플리케이션이 작업한 데이터를 저장하는 일을 한다.
-
   }
 }
