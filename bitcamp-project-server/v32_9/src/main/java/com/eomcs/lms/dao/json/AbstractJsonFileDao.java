@@ -103,6 +103,7 @@ public abstract class AbstractJsonFileDao<T> {
   // => abstract
   //
   protected abstract <K> int indexOf(K key);
+  
 }
 
 
