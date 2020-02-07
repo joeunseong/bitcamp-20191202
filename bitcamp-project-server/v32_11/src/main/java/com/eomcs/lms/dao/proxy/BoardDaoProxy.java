@@ -6,7 +6,7 @@ import java.util.List;
 import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
 
-// 프록시 객체는 항상 작업 객체와 동이란 인터페이스를 구현해야 한다.
+// 프록시 객체는 항상 작업 객체와 동일한 인터페이스를 구현해야 한다.
 // => 마치 자신이 작업 객체인양 보이기 위함이다.
 // => 프록시는 자신이 일을 안하고 서버에게 시킨다.
 //
