@@ -30,10 +30,12 @@ public class CalcServer {
         DataInputStream in = new DataInputStream(socket.getInputStream());
         PrintStream out = new PrintStream(socket.getOutputStream());) {
 
-
       int a = in.readInt();
+
       String op = in.readUTF();
+
       int b = in.readInt();
+
       int result = 0;
 
       switch (op) {
