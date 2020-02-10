@@ -11,7 +11,7 @@ public class Sender3 {
     System.out.println("클라이언트 실행!");
     Scanner keyScan = new Scanner(System.in);
 
-    Socket socket = new Socket("192.168.1.121", 8888);
+    Socket socket = new Socket("localhost", 8888);
 
     PrintStream out = new PrintStream(socket.getOutputStream());
     Scanner in = new Scanner(socket.getInputStream());
