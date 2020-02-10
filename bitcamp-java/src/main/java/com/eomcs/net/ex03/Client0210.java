@@ -24,7 +24,7 @@ public class Client0210 {
       // out.flush();
       // character stream 클래스의 경우
       // 출력 데이터를 내부 버퍼에 보관하고 있다가
-      // flush()가 호출되면 비로선 출력을 수행한다.
+      // flush()가 호출되면 비로소 출력을 수행한다.
       // 따라서 위 출력 문자열은 서버에 보내지 않는다.
       System.out.println("서버에 데이터를 보냈음!");
 

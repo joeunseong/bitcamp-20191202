@@ -9,7 +9,7 @@ public class Client0150 {
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
 
-    try (Socket socket = new Socket("192.168.1.60", 8888);
+    try (Socket socket = new Socket("localhost", 8888);
         PrintStream out = new PrintStream(socket.getOutputStream());
         Scanner in = new Scanner(socket.getInputStream())) {
       System.out.println("서버와 연결되었음!");
