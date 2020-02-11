@@ -1,5 +1,5 @@
-// connection-oriented 서버 - 연결 후 데이터 송수신
-package com.eomcs.net.ex06;
+// connection-oriented 서버 - 연결 후 데이터 송수신 - 운영체제가 데이터를 주고 받는 신뢰성 보장
+package com.eomcs.net.ex05;
 
 import java.io.PrintStream;
 import java.net.ServerSocket;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 // => TCP 통신 방법이 전형적인 예이다.
 //    예) FTP, Telnet, SMTP, POP3, HTTP 등 
 // 
-public class ConnectionOrientedServer {
+public class Server0110 {
   public static void main(String[] args) throws Exception {
     System.out.println("서버 실행 중...");
 
