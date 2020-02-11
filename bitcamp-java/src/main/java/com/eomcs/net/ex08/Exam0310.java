@@ -20,7 +20,7 @@ public class Exam0310 {
     // 1) mvnrepository.com 에서 apache httpclient 키워드로 검색한다.
     // 2) 최신 라이브러리 정보를 build.gradle의 dependencies {} 블록에 추가한다.
     // 3) 콘솔에서 "gradle eclipse"를 실행하여 .classpath 파일을 갱신한다.
-    //    이때 외부 라이브러리를 자동으로 다운로드 받을 것이다.
+    // 이때 외부 라이브러리를 자동으로 다운로드 받을 것이다.
     // 4) 이클립스 에디터에서 해당 프로젝트를 리프래시 한다.
     // 5) 이클립스의 프로젝트에서 해당 라이브러리가 추가되었는지 확인하라!
 
@@ -50,6 +50,7 @@ public class Exam0310 {
       // => 이 부분을 대신 해주는 도우미 클래스가 있다.
       String content = EntityUtils.toString(entity);
       System.out.println(content);
+
     }
   }
 
