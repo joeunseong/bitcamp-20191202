@@ -95,18 +95,19 @@ public class ServerApp {
       System.out.println("클라이언트 연결 대기중...");
 
       while (true) {
-        // 서버에 대기하고 있는 클라이언트와 연결
-        // => 대기하고 있는 클라이언트와 연결될 때까지 리턴하지 않는다.
-        Socket socket = serverSocket.accept(); // 승인은 접속 순서
+        Socket socket = serverSocket.accept();
         System.out.println("클라이언트와 연결되었음!");
 
-        // 클라이언트에 요청 처리
-        if (processRequest(socket) == 9) {
-          break;
-        }
-        System.out.println("-------------------------------------");
-      }
+        // 클라이언트의 요청을 처리하는 부분만
+        // main 스레드에서 분리하여 별도의 스레드로 실행한다.
+        // 따라서 스레드의 응답 지연에 다른 스레드가 영향을 받지 않는다.
+        new Thread(() -> {
+          processRequest(socket);
 
+          // 하나의 클라이언트 요청이 끝난 것 표시
+          System.out.println("-------------------------------------");
+        }).start();
+      }
     } catch (Exception e) {
       System.out.println("서버 준비 중 오류 발생");
     }
