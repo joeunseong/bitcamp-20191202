@@ -2,6 +2,7 @@ package com.eomcs.lms.dao.proxy;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.List;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
@@ -12,81 +13,105 @@ import com.eomcs.lms.domain.Member;
 // => MemberDao 작업 객체를 대행할 프록시를 정의한다.
 //
 public class MemberDaoProxy implements MemberDao {
-  ObjectInputStream in;
-  ObjectOutputStream out;
+  String host;
+  int port;
 
-  public MemberDaoProxy(ObjectInputStream in, ObjectOutputStream out) {
-    this.in = in;
-    this.out = out;
+  public MemberDaoProxy(String host, int port) {
+    this.host = host;
+    this.port = port;
   }
 
   @Override
   public int insert(Member member) throws Exception {
-    out.writeUTF("/member/add");
-    out.writeObject(member);
-    out.flush();
+    try (Socket socket = new Socket(host, port);
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-    String response = in.readUTF();
-    if (response.equals("FAIL")) {
-      throw new Exception(in.readUTF()); // 실패인 이유를 클라이언트에 보낸다.
+      out.writeUTF("/member/add");
+      out.writeObject(member);
+      out.flush();
+
+      String response = in.readUTF();
+      if (response.equals("FAIL")) {
+        throw new Exception(in.readUTF()); // 실패인 이유를 클라이언트에 보낸다.
+      }
+
+      System.out.println("저장하였습니다.");
+      return 1;
     }
-
-    System.out.println("저장하였습니다.");
-    return 1;
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public List<Member> findAll() throws Exception {
-    out.writeUTF("/member/list");
-    out.flush();
+    try (Socket socket = new Socket(host, port);
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-    String response = in.readUTF();
-    if (response.equals("FAIL")) {
-      throw new Exception(in.readUTF());
+      out.writeUTF("/member/list");
+      out.flush();
+
+      String response = in.readUTF();
+      if (response.equals("FAIL")) {
+        throw new Exception(in.readUTF());
+      }
+      return (List<Member>) in.readObject();
     }
-    return (List<Member>) in.readObject();
   }
-
 
   @Override
   public Member findByNo(int no) throws Exception {
-    out.writeUTF("/member/detail");
-    out.writeInt(no);
-    out.flush();
-    String response = in.readUTF();
+    try (Socket socket = new Socket(host, port);
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-    if (response.equals("FAIL")) {
-      throw new Exception(in.readUTF());
+      out.writeUTF("/member/detail");
+      out.writeInt(no);
+      out.flush();
+      String response = in.readUTF();
+
+      if (response.equals("FAIL")) {
+        throw new Exception(in.readUTF());
+      }
+
+      return (Member) in.readObject();
     }
-
-    return (Member) in.readObject();
   }
 
   @Override
   public int update(Member member) throws Exception {
-    out.writeUTF("/member/update");
-    out.writeObject(member);
-    out.flush();
+    try (Socket socket = new Socket(host, port);
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-    String response = in.readUTF();
-    if (response.equals("FAIL")) {
-      throw new Exception(in.readUTF());
+      out.writeUTF("/member/update");
+      out.writeObject(member);
+      out.flush();
+
+      String response = in.readUTF();
+      if (response.equals("FAIL")) {
+        throw new Exception(in.readUTF());
+      }
+      return 1;
     }
-    return 1;
   }
 
   @Override
   public int delete(int no) throws Exception {
-    out.writeUTF("/member/delete");
-    out.writeInt(no);
-    out.flush();
+    try (Socket socket = new Socket(host, port);
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-    String response = in.readUTF();
+      out.writeUTF("/member/delete");
+      out.writeInt(no);
+      out.flush();
 
-    if (response.equals("FAIL")) {
-      throw new Exception(in.readUTF());
+      String response = in.readUTF();
+
+      if (response.equals("FAIL")) {
+        throw new Exception(in.readUTF());
+      }
+      return 0;
     }
-    return 0;
   }
 }
