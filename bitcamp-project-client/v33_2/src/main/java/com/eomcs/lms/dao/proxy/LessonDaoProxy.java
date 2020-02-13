@@ -13,13 +13,13 @@ import com.eomcs.lms.domain.Lesson;
 // => LessonDao 작업 객체를 대행할 프록시를 정의한다.
 //
 public class LessonDaoProxy implements LessonDao {
+  String host;
+  int port;
 
-  LessonDaoProxy daoProxyHelper;
-
-  public LessonDaoProxy(LessonDaoProxy daoProxyHelper) {
-    this.daoProxyHelper = daoProxyHelper;
+  public LessonDaoProxy(String host, int port) {
+    this.host = host;
+    this.port = port;
   }
-
 
   @Override
   public int insert(Lesson lesson) throws Exception {

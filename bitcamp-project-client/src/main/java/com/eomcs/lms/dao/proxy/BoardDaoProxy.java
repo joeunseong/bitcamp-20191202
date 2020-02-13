@@ -2,88 +2,106 @@ package com.eomcs.lms.dao.proxy;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.List;
 import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
 
-// 프록시 객체는 항상 작업 객체와 동이란 인터페이스를 구현해야 한다.
+// 프록시 객체는 항상 작업 객체와 동일한 인터페이스를 구현해야 한다.
 // => 마치 자신이 작업 객체인양 보이기 위함이다.
-// => 프록시는 자신이 일을 안하고 서버에게 시킨다.
 //
 public class BoardDaoProxy implements BoardDao {
 
-  String host;
-  int port;
+  DaoProxyHelper daoProxyHelper;
 
-  public BoardDaoProxy(String host, int port) {
-    this.host = host;
-    this.port = port;
+  public BoardDaoProxy(DaoProxyHelper daoProxyHelper) {
+    this.daoProxyHelper = daoProxyHelper;
   }
 
   @Override
   public int insert(Board board) throws Exception {
-    try (Socket socket = new Socket(host, port);
-        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
+    class InsertWorker implements Worker {
+      @Override
+      public Object execute(ObjectInputStream in, ObjectOutputStream out) throws Exception {
+        out.writeUTF("/board/add");
+        out.writeObject(board);
+        out.flush();
 
-      out.writeUTF("/board/add");
-      out.writeObject(board);
-      out.flush();
-
-      String response = in.readUTF();
-      if (response.equals("FAIL")) {
-        throw new Exception(in.readUTF()); // 실패인 이유를 클라이언트에 보낸다.
+        String response = in.readUTF();
+        if (response.equals("FAIL")) {
+          throw new Exception(in.readUTF());
+        }
+        return 1;
       }
-      return 1;
     }
+
+    InsertWorker worker = new InsertWorker();
+
+    int resultState = (int) daoProxyHelper.request(worker);
+
+    return resultState;
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public List<Board> findAll() throws Exception {
-    try (Socket socket = new Socket(host, port);
-        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
-
-      out.writeUTF("/board/list");
-      out.flush();
-
-      String response = in.readUTF();
-      if (response.equals("FAIL")) {
-        throw new Exception(in.readUTF());
+    Worker worker = new Worker() {
+      @Override
+      public Object execute(ObjectInputStream in, ObjectOutputStream out) throws Exception {
+        out.writeUTF("/board/list");
+        out.flush();
+        String response = in.readUTF();
+        if (response.equals("FAIL")) {
+          throw new Exception(in.readUTF());
+        }
+        return in.readObject();
       }
-      return (List<Board>) in.readObject();
-    }
+    };
+    Object result = daoProxyHelper.request(worker);
+    return (List<Board>) result;
   }
 
   @Override
   public Board findByNo(int no) throws Exception {
-    try (Socket socket = new Socket(host, port);
-        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
+    Object result = daoProxyHelper.request(new Worker() {// 인터페이스를 구현한 익명 객체
+      @Override
+      public Object execute(ObjectInputStream in, ObjectOutputStream out) throws Exception {
+        out.writeUTF("/board/detail");
+        out.writeInt(no);
+        out.flush();
 
-      out.writeUTF("/board/detail");
-      out.writeInt(no);
-      out.flush();
-      String response = in.readUTF();
-
-      if (response.equals("FAIL")) {
-        throw new Exception(in.readUTF());
+        String response = in.readUTF();
+        if (response.equals("FAIL")) {
+          throw new Exception(in.readUTF());
+        }
+        return in.readObject();
       }
-
-      return (Board) in.readObject();
-    }
+    });
+    return (Board) result;
   }
 
   @Override
   public int update(Board board) throws Exception {
-    try (Socket socket = new Socket(host, port);
-        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
+    return (int) daoProxyHelper.request(new Worker() {
+      @Override
+      public Object execute(ObjectInputStream in, ObjectOutputStream out) throws Exception {
+        out.writeUTF("/board/update");
+        out.writeObject(board);
+        out.flush();
 
-      out.writeUTF("/board/update");
-      out.writeObject(board);
+        String response = in.readUTF();
+        if (response.equals("FAIL")) {
+          throw new Exception(in.readUTF());
+        }
+        return 1;
+      }
+    });
+  }
+
+  @Override
+  public int delete(int no) throws Exception {
+    return (int) daoProxyHelper.request((in, out) -> {
+      out.writeUTF("/board/delete");
+      out.writeInt(no);
       out.flush();
 
       String response = in.readUTF();
@@ -91,24 +109,7 @@ public class BoardDaoProxy implements BoardDao {
         throw new Exception(in.readUTF());
       }
       return 1;
-    }
+    });
   }
 
-  @Override
-  public int delete(int no) throws Exception {
-    try (Socket socket = new Socket(host, port);
-        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
-      out.writeUTF("/board/delete");
-      out.writeInt(no);
-      out.flush();
-
-      String response = in.readUTF();
-
-      if (response.equals("FAIL")) {
-        throw new Exception(in.readUTF());
-      }
-      return 0;
-    }
-  }
 }
