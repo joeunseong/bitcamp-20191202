@@ -68,8 +68,6 @@ public class ClientApp {
       command = prompt.inputString("\n명령> ");
 
       if (command.length() == 0)
-
-
         continue;
 
       if (command.equals("history")) {
