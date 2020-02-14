@@ -157,6 +157,7 @@ public class ServerApp {
       out.flush();
       System.out.println("클라이언트에게 응답하였음!");
       return 0;
+      
     } catch (Exception e) {
       System.out.println("예외발생:");
       e.printStackTrace();
