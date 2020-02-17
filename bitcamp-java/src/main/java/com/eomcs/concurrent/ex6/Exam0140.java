@@ -13,7 +13,7 @@ public class Exam0140 {
       public void setCount(int count) {
         this.count = count;
 
-        synchronized (this) {
+        synchronized (this) { // MyThread
           // synchnorized 블록에서 지정한 객체의 사용을 기다리는 스레드에게
           // 작업을 시작할 것을 알린다.
           notify();

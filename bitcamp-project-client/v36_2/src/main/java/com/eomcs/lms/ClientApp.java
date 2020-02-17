@@ -32,7 +32,7 @@ import com.eomcs.lms.handler.MemberDeleteCommand;
 import com.eomcs.lms.handler.MemberDetailCommand;
 import com.eomcs.lms.handler.MemberListCommand;
 import com.eomcs.lms.handler.MemberUpdateCommand;
-import com.eomcs.lms.util.Prompt;
+import com.eomcs.util.Prompt;
 
 public class ClientApp {
 
