@@ -1,6 +1,3 @@
-
-
-
 # DQL(Data Query Language)
 데이터를 조회할 때 사용하는 문법
 
@@ -89,14 +86,15 @@ where working='Y' or class='java100';
 /* java100기 학생 중에 재직자만 조회하라!*/
 select no, name, class, working
 from test1
-where working='Y' and class='java100';'
+where working='Y' and class='java100';
 
-/* 주의!
-   where 절을 통해 결과 데이터를 먼저 선택(selection)한 다음
-   결과 데이터를 가져올 컬럼을 선택(projection)한다.
-   따라서 실행 순서는:
-   from ==> where ==> select
+/* 주의! 
+  where 절을 통해 결과 데이터를 먼저 선택(selection)한 다음
+  결과 데이터를 가져올 컬럼을 선택(projection)한다.
+  따라서 실행 순서는:
+  from ==> where ==> seleczt
 */
+
 
 /* 재직자가 아닌 사람만 조회하라!*/
 select no, name, class, working
