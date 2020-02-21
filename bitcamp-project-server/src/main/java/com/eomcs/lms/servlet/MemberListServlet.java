@@ -1,8 +1,10 @@
 package com.eomcs.lms.servlet;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.PrintStream;
+import java.util.List;
+import java.util.Scanner;
 import com.eomcs.lms.dao.MemberDao;
+import com.eomcs.lms.domain.Member;
 
 public class MemberListServlet implements Servlet {
 
@@ -13,9 +15,16 @@ public class MemberListServlet implements Servlet {
   }
 
   @Override
-  public void service(ObjectInputStream in, ObjectOutputStream out) throws Exception {
-    out.writeUTF("OK");
-    out.reset();
-    out.writeObject(memberDao.findAll());
+  public void service(Scanner in, PrintStream out) throws Exception {
+    List<Member> members = memberDao.findAll();
+    for (Member m : members) {
+      out.printf("%d, %s, %s, %s, %s, %s\n", //
+          m.getNo(), //
+          m.getName(), //
+          m.getEmail(), //
+          m.getPhoto(), //
+          m.getTel(), //
+          m.getRegisteredDate());
+    }
   }
 }

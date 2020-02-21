@@ -1,13 +1,14 @@
 package com.eomcs.lms;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,16 +21,11 @@ import com.eomcs.lms.servlet.BoardDeleteServlet;
 import com.eomcs.lms.servlet.BoardDetailServlet;
 import com.eomcs.lms.servlet.BoardListServlet;
 import com.eomcs.lms.servlet.BoardUpdateServlet;
-import com.eomcs.lms.servlet.LessonAddServlet;
-import com.eomcs.lms.servlet.LessonDeleteServlet;
 import com.eomcs.lms.servlet.LessonDetailServlet;
 import com.eomcs.lms.servlet.LessonListServlet;
-import com.eomcs.lms.servlet.LessonUpdateServlet;
 import com.eomcs.lms.servlet.MemberAddServlet;
-import com.eomcs.lms.servlet.MemberDeleteServlet;
 import com.eomcs.lms.servlet.MemberDetailServlet;
 import com.eomcs.lms.servlet.MemberListServlet;
-import com.eomcs.lms.servlet.MemberUpdateServlet;
 import com.eomcs.lms.servlet.Servlet;
 
 public class ServerApp {
@@ -80,18 +76,18 @@ public class ServerApp {
     servletMap.put("/board/detail", new BoardDetailServlet(boardDao));
     servletMap.put("/board/update", new BoardUpdateServlet(boardDao));
     servletMap.put("/board/delete", new BoardDeleteServlet(boardDao));
-
+    //
     servletMap.put("/lesson/list", new LessonListServlet(lessonDao));
-    servletMap.put("/lesson/add", new LessonAddServlet(lessonDao));
+    // servletMap.put("/lesson/add", new LessonAddServlet(lessonDao));
     servletMap.put("/lesson/detail", new LessonDetailServlet(lessonDao));
-    servletMap.put("/lesson/update", new LessonUpdateServlet(lessonDao));
-    servletMap.put("/lesson/delete", new LessonDeleteServlet(lessonDao));
-
+    // servletMap.put("/lesson/update", new LessonUpdateServlet(lessonDao));
+    // servletMap.put("/lesson/delete", new LessonDeleteServlet(lessonDao));
+    //
     servletMap.put("/member/list", new MemberListServlet(memberDao));
     servletMap.put("/member/add", new MemberAddServlet(memberDao));
     servletMap.put("/member/detail", new MemberDetailServlet(memberDao));
-    servletMap.put("/member/update", new MemberUpdateServlet(memberDao));
-    servletMap.put("/member/delete", new MemberDeleteServlet(memberDao));
+    // servletMap.put("/member/update", new MemberUpdateServlet(memberDao));
+    // servletMap.put("/member/delete", new MemberDeleteServlet(memberDao));
 
     try (
         // 서버쪽 연결 준비
@@ -103,14 +99,8 @@ public class ServerApp {
         Socket socket = serverSocket.accept();
         System.out.println("클라이언트와 연결되었음!");
 
-        // 스레드풀을 사용할 때는 직접 스레들르 만들지 않는다.
-        // 단지 스레드풀에 "스레드가 실행할 코드(Runnable 구현체)"를 제출한다.
-        // => ExecutorService.submit(new Runnable(){...});
-        // => 스레드풀에 스레드가 없으면 새로 만들어 Runnable구현체를 실행한다.
-        // => 스페드풀에 스레드가 없으면 그 스레드를 이용하여 Runnable 구현체를 실행한다.
         executorService.submit(() -> {
           processRequest(socket);
-          // 하나의 클라이언트 요청이 끝난 것 표시
           System.out.println("-------------------------------------");
         });
       }
@@ -131,34 +121,29 @@ public class ServerApp {
 
   int processRequest(Socket clientSocket) {
     try (Socket socket = clientSocket;
+        Scanner in = new Scanner(socket.getInputStream());
+        PrintStream out = new PrintStream(socket.getOutputStream())) {
 
-        // 클라이언트의 메시지를 수신하고 클라이언트로 전송할 입출력 도구 준비
-        // 객체라서 Scanner가 아니라 ObjectInputStream을 써야함
-        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())) {
+      // 클라이언트가 보낸 명령을 읽는다.
+      String request = in.nextLine();
+      System.out.printf("=> %s\n", request);
 
-      System.out.println("통신을 위한 입출력 스트림을 준비하였음!");
+      // if (request.equalsIgnoreCase("/server/stop")) {
+      // return 9; // 서버를 종료한다.
+      // }
 
-      String request = in.readUTF();
-      System.out.println("클라이언트가 보낸 메시지를 수신하였음");
-
-      if (request.equalsIgnoreCase("/server/stop")) {
-        quit(out);
-        return 9; // 서버를 종료한다.
-      }
-
-      // 클라이언트의 요청을 처리할 객체를 찾는다.
+      // // 클라이언트의 요청을 처리할 객체를 찾는다.
       Servlet servlet = servletMap.get(request);
 
       if (servlet != null) {
         try {
-          // 클라이언트 요청을 처리할 객체를 찾았으면 작업을 실행시킨다.
           servlet.service(in, out);
 
         } catch (Exception e) {
-          // 요청한 작업을 수행하다가 오류가 발생할 경우 그 이유를 간단히 응답한다.
-          out.writeUnshared("FAIL");
-          out.writeUTF(e.getMessage());
+          // 요청한 작업을 수행하다가 오류가 발생할 경우
+          // 그 이유를 간단히 응답한다.
+          System.out.println("요청 처리중 오류 발생!");
+          out.println(e.getMessage());
 
           // 서버 쪽 화면에는 더 자세하게 오류 내용을 출력한다.
           System.out.println("클라이언트 요청 처리 중 오류 발생:");
@@ -167,10 +152,12 @@ public class ServerApp {
       } else {// 없다면? 간단한 안내 메시지를 응답한다.
         notFound(out);
       }
-
+      out.println("!end!");
       out.flush();
       System.out.println("클라이언트에게 응답하였음!");
+
       return 0;
+
     } catch (Exception e) {
       System.out.println("예외발생:");
       e.printStackTrace();
@@ -178,9 +165,8 @@ public class ServerApp {
     }
   }
 
-  private void notFound(ObjectOutputStream out) throws IOException {
-    out.writeUTF("FAIL");
-    out.writeUTF("요청한 명령을 처리할 수 없습니다.");
+  private void notFound(PrintStream out) throws IOException {
+    out.println("요청한 명령을 처리할 수 없습니다.");
   }
 
   private void quit(ObjectOutputStream out) throws IOException {
