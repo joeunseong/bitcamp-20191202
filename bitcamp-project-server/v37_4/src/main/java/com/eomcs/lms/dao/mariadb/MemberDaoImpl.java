@@ -102,10 +102,10 @@ public class MemberDaoImpl implements MemberDao {
   public List<Member> findByKeyword(String keyword) throws Exception {
     try (Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery( //
-            "select member_id, name, email, tel, cdt"//
-                + " from lms_member"//
+            "select member_id, name, email, tel, cdt" //
+                + " from lms_member" //
                 + " where name like '%" + keyword //
-                + "%' or email like '%" + keyword//
+                + "%' or email like '%" + keyword //
                 + "%' or tel like '%" + keyword + "%'")) {
 
       ArrayList<Member> list = new ArrayList<>();
@@ -125,4 +125,5 @@ public class MemberDaoImpl implements MemberDao {
       return list;
     }
   }
+
 }
