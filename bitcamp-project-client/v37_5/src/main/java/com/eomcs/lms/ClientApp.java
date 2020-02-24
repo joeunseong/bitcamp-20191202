@@ -48,16 +48,15 @@ public class ClientApp {
 
       processCommand(command);
 
-      // 사용자가 서버 종료를 요청했다면,
+      // 사용자가 서버에 종료를 요청했다면,
       if (command.endsWith("/server/stop")) {
-        // 서버는 다음 클라이언트 요청이 들어올 때 처리할 것이다.
-        // 이를 즉시 처리하도록 하기 위해
+        // 서버는 다음 클라이언트 요청이 들어 올 때 처리할 것이다.
+        // 이를 즉시 처리하도록 하기 위해,
         // 임의 요청을 한 번 더 보내자.
         processCommand(command);
       }
     }
     keyboard.close();
-
   }
 
   private void processCommand(String command) {
@@ -71,22 +70,25 @@ public class ClientApp {
     int port = 9999;
     String servletPath = null;
 
-    // 명령어를 분석하여 서버 주소와 포트번호, 실행시킬 작업명을 분리한다.
+    // 명령어를 분석하여 서버주소와 포트번호, 실행시킬 작업명을 분리한다.
     try {
       if (!command.startsWith("bitcamp://")) {
         throw new Exception("명령어 형식이 옳지 않습니다!");
       }
+
       // System.out.println(command);
       // command 예) bitcamp://localhost:9999/board/list
-      String url = command.substring(10);
 
+      String url = command.substring(10);
       // => localhost:9999/board/list
+
       // System.out.println(url);
 
       int index = url.indexOf('/'); // 14
       String[] str = //
           url.substring(0, index) // localhost:9999
               .split(":"); // {"localhost", "9999"}
+
       host = str[0];
       if (str.length == 2) {
         port = Integer.parseInt(str[1]);
@@ -94,7 +96,7 @@ public class ClientApp {
       // System.out.printf("=> %s:%d\n", host, port); // => localhost:9999
 
       servletPath = url.substring(index);
-      // System.out.printf("=> %s\n", servletPath); // => board/list
+      // System.out.printf("=> %s\n", servletPath); // => /board/list
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -110,7 +112,7 @@ public class ClientApp {
       out.println(servletPath);
       out.flush();
 
-      // 서버에 응답을 읽어서 출력한다.
+      // 서버의 응답을 읽어서 출력한다.
       while (true) {
         String response = in.nextLine();
         if (response.equals("!end!")) {
