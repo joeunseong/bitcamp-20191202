@@ -43,7 +43,8 @@ public class DataLoaderListener implements ApplicationContextListener {
     try {
       con.close();
     } catch (Exception e) {
-      e.printStackTrace();
+      // DB 커넥션을 닫다가 예외 발생하면 무시한다.
+      // 왜? 클라이언트 쪽에서 달리 해야 할 일이 없다.
     }
   }
 }

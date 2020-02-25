@@ -10,8 +10,9 @@ public class PhotoBoardDeleteServlet implements Servlet {
   PhotoBoardDao photoBoardDao;
   PhotoFileDao photoFileDao;
 
-
-  public PhotoBoardDeleteServlet(PhotoBoardDao photoBoardDao, PhotoFileDao photoFileDao) {
+  public PhotoBoardDeleteServlet( //
+      PhotoBoardDao photoBoardDao, //
+      PhotoFileDao photoFileDao) {
     this.photoBoardDao = photoBoardDao;
     this.photoFileDao = photoFileDao;
   }
@@ -19,6 +20,7 @@ public class PhotoBoardDeleteServlet implements Servlet {
 
   @Override
   public void service(Scanner in, PrintStream out) throws Exception {
+
     out.println("번호? ");
     out.println("!{}!");
     out.flush();
@@ -29,7 +31,7 @@ public class PhotoBoardDeleteServlet implements Servlet {
     // 첨부 파일 데이터를 삭제한다.
     photoFileDao.deleteAll(no);
 
-    if (photoBoardDao.delete(no) > 0) { // 삭제했다면,
+    if (photoBoardDao.delete(no) > 0) {
       out.println("사진 게시글을 삭제했습니다.");
 
     } else {

@@ -158,7 +158,7 @@ public class ServerApp {
 
           } catch (Exception e) {
             // 요청한 작업을 수행하다가 오류가 발생할 경우 그 이유를 간단히 응답한다.
-            out.writeUnshared("FAIL");
+            out.writeUTF("FAIL");
             out.writeUTF(e.getMessage());
 
             // 서버 쪽 화면에는 더 자세하게 오류 내용을 출력한다.
@@ -173,9 +173,7 @@ public class ServerApp {
         System.out.println("클라이언트에게 응답하였음!");
         System.out.println("----------------------------------------");
       }
-    } catch (
-
-    Exception e) {
+    } catch (Exception e) {
       System.out.println("예외발생:");
       e.printStackTrace();
       return -1;

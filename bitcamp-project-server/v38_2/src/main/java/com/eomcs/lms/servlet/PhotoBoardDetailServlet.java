@@ -13,8 +13,9 @@ public class PhotoBoardDetailServlet implements Servlet {
   PhotoBoardDao photoBoardDao;
   PhotoFileDao photoFileDao;
 
-
-  public PhotoBoardDetailServlet(PhotoBoardDao photoBoardDao, PhotoFileDao photoFileDao) {
+  public PhotoBoardDetailServlet( //
+      PhotoBoardDao photoBoardDao, //
+      PhotoFileDao photoFileDao) {
     this.photoBoardDao = photoBoardDao;
     this.photoFileDao = photoFileDao;
   }
@@ -40,6 +41,7 @@ public class PhotoBoardDetailServlet implements Servlet {
       for (PhotoFile photoFile : photoFiles) {
         out.printf("> %s\n", photoFile.getFilepath());
       }
+
     } else {
       out.println("해당 번호의 사진 게시글이 없습니다.");
     }
