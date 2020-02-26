@@ -84,7 +84,8 @@ public class ServerApp {
     notifyApplicationInitialized();
 
     // ConnectionFactory 꺼낸다.
-    ConnectionFactory conFactory = (ConnectionFactory) context.get("connectionFactory");
+    ConnectionFactory conFactory = (ConnectionFactory) context.get(//
+        "connectionFactory");
 
     // DataLoaderListener가 준비한 DAO 객체를 꺼내 변수에 저장한다.
     BoardDao boardDao = (BoardDao) context.get("boardDao");
@@ -157,9 +158,7 @@ public class ServerApp {
 
       }
 
-    } catch (
-
-    Exception e) {
+    } catch (Exception e) {
       System.out.println("서버 준비 중 오류 발생!");
     }
 
@@ -192,7 +191,6 @@ public class ServerApp {
     notifyApplicationDestroyed();
 
     System.out.println("서버 종료!");
-
   } // service()
 
 
