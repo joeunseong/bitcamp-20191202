@@ -43,7 +43,6 @@ public class PhotoBoardAddServlet implements Servlet {
 
     photoBoard.setLesson(lesson);
 
-
     try {
       if (photoBoardDao.insert(photoBoard) == 0) {
         throw new Exception("사진 게시글 등록에 실패했습니다.");
@@ -57,6 +56,7 @@ public class PhotoBoardAddServlet implements Servlet {
 
     } catch (Exception e) {
       out.println(e.getMessage());
+
     }
   }
 
