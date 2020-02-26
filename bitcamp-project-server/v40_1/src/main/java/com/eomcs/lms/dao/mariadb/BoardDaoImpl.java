@@ -10,6 +10,7 @@ import com.eomcs.lms.domain.Board;
 import com.eomcs.util.ConnectionFactory;
 
 public class BoardDaoImpl implements BoardDao {
+
   ConnectionFactory conFactory;
 
   public BoardDaoImpl(ConnectionFactory conFactory) {
@@ -27,6 +28,7 @@ public class BoardDaoImpl implements BoardDao {
 
     try (Connection con = conFactory.getConnection(); //
         Statement stmt = con.createStatement()) {
+
       int result = stmt.executeUpdate("insert into lms_board(conts) values('" //
           + board.getTitle() + "')");
 
@@ -38,7 +40,6 @@ public class BoardDaoImpl implements BoardDao {
   public List<Board> findAll() throws Exception {
     try (Connection con = conFactory.getConnection();
         Statement stmt = con.createStatement();
-
         ResultSet rs = stmt.executeQuery( //
             "select board_id, conts, cdt, vw_cnt from lms_board order by board_id desc")) {
 
@@ -61,12 +62,12 @@ public class BoardDaoImpl implements BoardDao {
 
   @Override
   public Board findByNo(int no) throws Exception {
-    try (Connection con = conFactory.getConnection();
+    try (Connection con = conFactory.getConnection(); //
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery( //
             "select board_id, conts, cdt, vw_cnt from lms_board where board_id=" + no)) {
 
-      if (rs.next()) {
+      if (rs.next()) { // 데이터를 한 개 가져왔으면 true를 리턴한다.
         Board board = new Board();
         board.setNo(rs.getInt("board_id"));
         board.setTitle(rs.getString("conts"));
