@@ -5,96 +5,76 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.dao.PhotoBoardDao;
 import com.eomcs.lms.dao.PhotoFileDao;
+import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
 import com.eomcs.util.ConnectionFactory;
 import com.eomcs.util.Prompt;
 
-public class PhotoBoardUpdateServlet implements Servlet {
+public class PhotoBoardAddServlet implements Servlet {
+
   ConnectionFactory conFactory;
   PhotoBoardDao photoBoardDao;
+  LessonDao lessonDao;
   PhotoFileDao photoFileDao;
 
-  public PhotoBoardUpdateServlet(//
+  public PhotoBoardAddServlet( //
       ConnectionFactory conFactory, //
       PhotoBoardDao photoBoardDao, //
+      LessonDao lessonDao, //
       PhotoFileDao photoFileDao) {
     this.conFactory = conFactory;
     this.photoBoardDao = photoBoardDao;
+    this.lessonDao = lessonDao;
     this.photoFileDao = photoFileDao;
   }
 
   @Override
   public void service(Scanner in, PrintStream out) throws Exception {
 
-    int no = Prompt.getInt(in, out, "번호? ");
+    PhotoBoard photoBoard = new PhotoBoard();
+    photoBoard.setTitle(Prompt.getString(in, out, "제목? "));
 
-    PhotoBoard old = photoBoardDao.findByNo(no);
-    if (old == null) {
-      out.println("해당 번호의 사진 게시글이 없습니다.");
+    int lessonNo = Prompt.getInt(in, out, "수업 번호? ");
+
+    Lesson lesson = lessonDao.findByNo(lessonNo);
+    if (lesson == null) {
+      out.println("수업 번호가 유효하지 않습니다.");
       return;
     }
 
-    PhotoBoard photoBoard = new PhotoBoard();
-    photoBoard.setTitle(Prompt.getString(in, out, //
-        String.format("제목(%s)? \n", old.getTitle()), //
-        old.getTitle()));
-    photoBoard.setNo(no);
+    photoBoard.setLesson(lesson);
 
     // 트랜잭션 시작
     Connection con = conFactory.getConnection();
-
     // => ConnectionFactory는 스레드에 보관된 Connection 객체를 찾을 것이다.
-    // => 있으면 스레드에 보관된 객체를 Connection 객체를 리턴해 줄 것이고,
+    // => 있으면 스레드에 보관된 Connection 객체를 리턴해 줄 것이고,
     // => 없으면 새로 만들어 리턴해 줄 것이다.
-    // => 물론 새로 마든 Connection 객체는 스레드에도 보관될 것이다.
+    // => 물론 새로 만든 Connection 객체는 스레드에도 보관될 것이다.
 
     con.setAutoCommit(false);
 
     try {
-      if (photoBoardDao.update(photoBoard) == 0) {
-        throw new Exception("사진 게시글 변경에 실패했습니다.");
+      if (photoBoardDao.insert(photoBoard) == 0) {
+        throw new Exception("사진 게시글 등록에 실패했습니다.");
       }
-
-      printPhotoFiles(out, no);
-
-      out.println();
-      out.println("사진은 일부만 변경할 수 없습니다.");
-      out.println("전체를 새로 등록해야 합니다.");
-
-      String response = Prompt.getString(in, out, //
-          "사진을 변경하시겠습니까?(y/N) ");
-
-      if (response.equalsIgnoreCase("y")) {
-
-        // 이 사진 게시글에 첨부되었은 기존 파일을 모두 삭제한다.
-        photoFileDao.deleteAll(no);
-
-        List<PhotoFile> photoFiles = inputPhotoFiles(in, out);
-
-        for (PhotoFile photoFile : photoFiles) {
-          photoFile.setBoardNo(no);
-          photoFileDao.insert(photoFile);
-        }
+      List<PhotoFile> photoFiles = inputPhotoFiles(in, out);
+      for (PhotoFile photoFile : photoFiles) {
+        photoFile.setBoardNo(photoBoard.getNo());
+        photoFileDao.insert(photoFile);
       }
       con.commit();
-      out.println("사진 게시글을 변경했습니다.");
+      out.println("새 사진 게시글을 등록했습니다.");
 
     } catch (Exception e) {
       con.rollback();
       out.println(e.getMessage());
+
     } finally {
       con.setAutoCommit(true);
-    }
-  }
-
-  private void printPhotoFiles(PrintStream out, int boardNo) throws Exception {
-    out.println("사진파일:");
-    List<PhotoFile> oldPhotoFiles = photoFileDao.findAll(boardNo);
-    for (PhotoFile photoFile : oldPhotoFiles) {
-      out.printf("> %s\n", photoFile.getFilepath());
     }
   }
 

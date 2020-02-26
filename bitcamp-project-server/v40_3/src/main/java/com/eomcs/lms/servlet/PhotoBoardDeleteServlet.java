@@ -9,6 +9,7 @@ import com.eomcs.util.ConnectionFactory;
 import com.eomcs.util.Prompt;
 
 public class PhotoBoardDeleteServlet implements Servlet {
+
   ConnectionFactory conFactory;
   PhotoBoardDao photoBoardDao;
   PhotoFileDao photoFileDao;
@@ -22,18 +23,17 @@ public class PhotoBoardDeleteServlet implements Servlet {
     this.photoFileDao = photoFileDao;
   }
 
-
   @Override
   public void service(Scanner in, PrintStream out) throws Exception {
 
     int no = Prompt.getInt(in, out, "번호? ");
+
     // 트랜잭션 시작
     Connection con = conFactory.getConnection();
-
     // => ConnectionFactory는 스레드에 보관된 Connection 객체를 찾을 것이다.
-    // => 있으면 스레드에 보관된 객체를 Connection 객체를 리턴해 줄 것이고,
+    // => 있으면 스레드에 보관된 Connection 객체를 리턴해 줄 것이고,
     // => 없으면 새로 만들어 리턴해 줄 것이다.
-    // => 물론 새로 마든 Connection 객체는 스레드에도 보관될 것이다.
+    // => 물론 새로 만든 Connection 객체는 스레드에도 보관될 것이다.
 
     con.setAutoCommit(false);
 
@@ -49,6 +49,7 @@ public class PhotoBoardDeleteServlet implements Servlet {
     } catch (Exception e) {
       con.rollback();
       out.println(e.getMessage());
+
     } finally {
       con.setAutoCommit(true);
     }
