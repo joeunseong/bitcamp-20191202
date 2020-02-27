@@ -33,9 +33,7 @@ public class MemberUpdateServlet implements Servlet {
     member.setEmail(Prompt.getString(in, out, //
         String.format("이메일(%s)? \n", old.getEmail()), //
         old.getEmail()));
-    member.setPassword(Prompt.getString(in, out, //
-        String.format("암호(%s)? \n", old.getPassword()), //
-        old.getPassword()));
+    member.setPassword(Prompt.getString(in, out, "암호? "));
     member.setPhoto(Prompt.getString(in, out, //
         String.format("사진(%s)? \n", old.getPhoto()), //
         old.getPhoto()));

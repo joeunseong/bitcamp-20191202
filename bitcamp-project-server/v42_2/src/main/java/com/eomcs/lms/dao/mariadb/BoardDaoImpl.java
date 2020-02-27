@@ -10,6 +10,7 @@ import com.eomcs.lms.domain.Board;
 import com.eomcs.sql.DataSource;
 
 public class BoardDaoImpl implements BoardDao {
+
   DataSource dataSource;
 
   public BoardDaoImpl(DataSource dataSource) {
@@ -18,6 +19,7 @@ public class BoardDaoImpl implements BoardDao {
 
   @Override
   public int insert(Board board) throws Exception {
+
     try (Connection con = dataSource.getConnection(); //
         PreparedStatement stmt = con.prepareStatement(//
             "insert into lms_board(conts) values(?)")) {
@@ -30,20 +32,17 @@ public class BoardDaoImpl implements BoardDao {
   public List<Board> findAll() throws Exception {
     try (Connection con = dataSource.getConnection();
         PreparedStatement stmt = con.prepareStatement(//
-            "select board_id, conts, cdt, vw_cnt "//
-                + "from lms_board order by board_id desc");
+            "select board_id, conts, cdt, vw_cnt" //
+                + " from lms_board" //
+                + " order by board_id desc");
         ResultSet rs = stmt.executeQuery()) {
-
       ArrayList<Board> list = new ArrayList<>();
-
       while (rs.next()) {
         Board board = new Board();
-
         board.setNo(rs.getInt("board_id"));
         board.setTitle(rs.getString("conts"));
         board.setDate(rs.getDate("cdt"));
         board.setViewCount(rs.getInt("vw_cnt"));
-
         list.add(board);
       }
 
@@ -53,22 +52,20 @@ public class BoardDaoImpl implements BoardDao {
 
   @Override
   public Board findByNo(int no) throws Exception {
-    try (Connection con = dataSource.getConnection();
+    try (Connection con = dataSource.getConnection(); //
         PreparedStatement stmt = con.prepareStatement(//
-            "select board_id, conts, cdt, vw_cnt"//
-                + " from lms_board"//
+            "select board_id, conts, cdt, vw_cnt" //
+                + " from lms_board" //
                 + " where board_id=?")) {
       stmt.setInt(1, no);
       try (ResultSet rs = stmt.executeQuery()) {
-
-        if (rs.next()) {
+        if (rs.next()) { // 데이터를 한 개 가져왔으면 true를 리턴한다.
           Board board = new Board();
           board.setNo(rs.getInt("board_id"));
           board.setTitle(rs.getString("conts"));
           board.setDate(rs.getDate("cdt"));
           board.setViewCount(rs.getInt("vw_cnt"));
           return board;
-
         } else {
           return null;
         }
@@ -80,8 +77,8 @@ public class BoardDaoImpl implements BoardDao {
   public int update(Board board) throws Exception {
     try (Connection con = dataSource.getConnection(); //
         PreparedStatement stmt = con.prepareStatement(//
-            "update lms_board set"//
-                + " conts =?"//
+            "update lms_board set" //
+                + " conts=?" //
                 + " where board_id=?")) {
       stmt.setString(1, board.getTitle());
       stmt.setInt(2, board.getNo());
@@ -99,5 +96,4 @@ public class BoardDaoImpl implements BoardDao {
       return stmt.executeUpdate();
     }
   }
-
 }
