@@ -45,7 +45,7 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
 
   @Override
   public List<PhotoBoard> findAllByLessonNo(int lessonNo) throws Exception {
-    try (Connection con = dataSource.getConnection(); // ;
+    try (Connection con = dataSource.getConnection(); //
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery( //
             "select photo_id, titl, cdt, vw_cnt, lesson_id" //

@@ -21,6 +21,7 @@ import java.util.Properties;
 import java.util.concurrent.Executor;
 
 public class ConnectionProxy implements Connection {
+
   Connection origin;
 
   public ConnectionProxy(Connection origin) {
@@ -35,9 +36,9 @@ public class ConnectionProxy implements Connection {
   @Override
   public void close() throws SQLException {
     // 커넥션을 닫으라고 해도 닫지 않는다.
-    // 별도로 추가한 realClose()를 호출할 때 진짜로 닫는다.
+    // 별도로 추가한 realClose()호출할 때 진짜로 닫는다.
     System.out.println("내가 닫을 것 같으냐!");
-    System.out.println("진짜 닫고 싶으면 realClose()를 호출해라");
+    System.out.println("진짜 닫고 싶다면 realClose()를 호출하거라!");
   }
 
   @Override
@@ -342,5 +343,7 @@ public class ConnectionProxy implements Connection {
   public void setShardingKey(ShardingKey shardingKey) throws SQLException {
     origin.setShardingKey(shardingKey);
   }
+
+
 
 }

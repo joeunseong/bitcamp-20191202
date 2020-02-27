@@ -10,6 +10,7 @@ import com.eomcs.lms.domain.Member;
 import com.eomcs.sql.DataSource;
 
 public class MemberDaoImpl implements MemberDao {
+
   DataSource dataSource;
 
   public MemberDaoImpl(DataSource dataSource) {
