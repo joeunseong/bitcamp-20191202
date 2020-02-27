@@ -12,11 +12,14 @@ import com.eomcs.sql.PlatformTransactionManager;
 import com.eomcs.util.Prompt;
 
 public class PhotoBoardUpdateServlet implements Servlet {
+
   PlatformTransactionManager txManager;
   PhotoBoardDao photoBoardDao;
   PhotoFileDao photoFileDao;
 
-  public PhotoBoardUpdateServlet(PlatformTransactionManager txManager, PhotoBoardDao photoBoardDao,
+  public PhotoBoardUpdateServlet( //
+      PlatformTransactionManager txManager, //
+      PhotoBoardDao photoBoardDao, //
       PhotoFileDao photoFileDao) {
     this.txManager = txManager;
     this.photoBoardDao = photoBoardDao;

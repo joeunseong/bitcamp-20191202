@@ -84,7 +84,9 @@ public class ServerApp {
 
     notifyApplicationInitialized();
 
-    ConnectionFactory conFactory = (ConnectionFactory) context.get("connectionFactory");
+    // ConnectionFactory 꺼낸다.
+    ConnectionFactory conFactory = (ConnectionFactory) context.get(//
+        "connectionFactory");
 
     // DataLoaderListener가 준비한 DAO 객체를 꺼내 변수에 저장한다.
     BoardDao boardDao = (BoardDao) context.get("boardDao");
@@ -94,7 +96,7 @@ public class ServerApp {
     PhotoFileDao photoFileDao = (PhotoFileDao) context.get("photoFileDao");
 
     // 트랜잭션 관리자를 꺼내 변수에 저장한다.
-    PlatformTransactionManager txManager =
+    PlatformTransactionManager txManager = //
         (PlatformTransactionManager) context.get("transactionManager");
 
     // 커맨드 객체 역할을 수행하는 서블릿 객체를 맵에 보관한다.
@@ -161,9 +163,7 @@ public class ServerApp {
 
       }
 
-    } catch (
-
-    Exception e) {
+    } catch (Exception e) {
       System.out.println("서버 준비 중 오류 발생!");
     }
 
@@ -196,7 +196,6 @@ public class ServerApp {
     notifyApplicationDestroyed();
 
     System.out.println("서버 종료!");
-
   } // service()
 
 

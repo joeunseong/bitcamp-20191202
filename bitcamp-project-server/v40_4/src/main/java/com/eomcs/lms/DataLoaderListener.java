@@ -25,10 +25,11 @@ public class DataLoaderListener implements ApplicationContextListener {
       String password = "1111";
 
       // Connection 팩토리 준비
-      ConnectionFactory conFactory = new ConnectionFactory(jdbcUrl, username, password);
+      ConnectionFactory conFactory = new ConnectionFactory(//
+          jdbcUrl, username, password);
       context.put("connectionFactory", conFactory);
 
-      // 이 메소드를 호출한 쪽(App)에서 DAO 객체를 사용할 수 있도록 Map 객체에 담아둔다.
+      // 이 메서드를 호출한 쪽(App)에서 DAO 객체를 사용할 수 있도록 Map 객체에 담아둔다.
       context.put("boardDao", new BoardDaoImpl(conFactory));
       context.put("lessonDao", new LessonDaoImpl(conFactory));
       context.put("memberDao", new MemberDaoImpl(conFactory));
@@ -37,7 +38,8 @@ public class DataLoaderListener implements ApplicationContextListener {
 
       // 트랜잭션 관리자 준비
       PlatformTransactionManager txManager = new PlatformTransactionManager(conFactory);
-      context.put("txManager", txManager);
+      context.put("transactionManager", txManager);
+
     } catch (Exception e) {
       e.printStackTrace();
     }

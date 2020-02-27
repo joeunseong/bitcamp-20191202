@@ -8,17 +8,19 @@ import com.eomcs.sql.PlatformTransactionManager;
 import com.eomcs.util.Prompt;
 
 public class PhotoBoardDeleteServlet implements Servlet {
+
   PlatformTransactionManager txManager;
   PhotoBoardDao photoBoardDao;
   PhotoFileDao photoFileDao;
 
-  public PhotoBoardDeleteServlet(PlatformTransactionManager txManager, PhotoBoardDao photoBoardDao,
+  public PhotoBoardDeleteServlet( //
+      PlatformTransactionManager txManager, //
+      PhotoBoardDao photoBoardDao, //
       PhotoFileDao photoFileDao) {
     this.txManager = txManager;
     this.photoBoardDao = photoBoardDao;
     this.photoFileDao = photoFileDao;
   }
-
 
   @Override
   public void service(Scanner in, PrintStream out) throws Exception {
