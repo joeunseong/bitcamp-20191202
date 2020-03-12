@@ -2,8 +2,8 @@ package com.eomcs.lms.servlet;
 
 import java.io.PrintStream;
 import java.util.Scanner;
-import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
+import com.eomcs.lms.service.LessonService;
 import com.eomcs.util.Prompt;
 
 public class LessonUpdateServlet implements Servlet {
@@ -12,10 +12,10 @@ public class LessonUpdateServlet implements Servlet {
   // 인터페이스를 지정함으로써
   // 향후 다른 구현체로 교체하기 쉽도록 한다.
   //
-  LessonDao lessonDao;
+  LessonService lessonService;
 
-  public LessonUpdateServlet(LessonDao lessonDao) {
-    this.lessonDao = lessonDao;
+  public LessonUpdateServlet(LessonService lessonService) {
+    this.lessonService = lessonService;
   }
 
   @Override
@@ -23,7 +23,7 @@ public class LessonUpdateServlet implements Servlet {
 
     int no = Prompt.getInt(in, out, "번호? ");
 
-    Lesson old = lessonDao.findByNo(no);
+    Lesson old = lessonService.get(no);
     if (old == null) {
       out.println("해당 번호의 강의가 없습니다.");
       return;
@@ -44,7 +44,7 @@ public class LessonUpdateServlet implements Servlet {
     lesson.setDayHours(Prompt.getInt(in, out, //
         String.format("일 강의시간(%d)? ", old.getDayHours())));
 
-    if (lessonDao.update(lesson) > 0) {
+    if (lessonService.update(lesson) > 0) {
       out.println("강의를 변경했습니다.");
 
     } else {

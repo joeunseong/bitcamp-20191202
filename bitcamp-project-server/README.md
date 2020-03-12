@@ -1,9 +1,22 @@
-# 43_1 - MyBatis SQL 맵퍼 프레임워크를 사용하여 JDBC 코드를 대체하기
+# 44_1 - UI 객체에서 비즈니스 로직 분리하기
 
 ## 학습목표
 
-- MyBatis SQL 맵퍼의 특징과 동작 원리를 이해한다.
-- MyBatis 퍼시스턴스 프레임워크를 설정하고 사용할 수 있다.
+- Presentation/Service(Business)/Presistence Layer 구조를 이해한다.
+
+### Presentation Layer
+
+- UI를 담당한다.
+
+### Business(Service) Layer
+
+- 업무 로직을 담당한다.
+- 트랜잭션 제어를 담당한다.
+
+### Persistence Layer
+
+- 데이터 저장을 담당한다.
+
 
 ## 실습 소스 및 결과
 
