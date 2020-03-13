@@ -152,7 +152,6 @@ public class ServerApp {
       System.out.println("서버 준비 중 오류 발생!");
     }
 
-
     // 스레드풀을 다 사용했으면 종료하라고 해야 한다.
     executorService.shutdown();
     // => 스레드풀을 당장 종료시키는 것이 아니다.
