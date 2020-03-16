@@ -4,8 +4,10 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.service.BoardService;
+import com.eomcs.util.Component;
 import com.eomcs.util.Prompt;
 
+@Component("/board/detail")
 public class BoardDetailServlet implements Servlet {
 
   BoardService boardService;
@@ -13,7 +15,6 @@ public class BoardDetailServlet implements Servlet {
   public BoardDetailServlet(BoardService boardService) {
     this.boardService = boardService;
   }
-
 
   @Override
   public void service(Scanner in, PrintStream out) throws Exception {

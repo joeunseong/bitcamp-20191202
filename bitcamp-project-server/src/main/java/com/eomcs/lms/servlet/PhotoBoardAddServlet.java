@@ -9,20 +9,25 @@ import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
 import com.eomcs.lms.service.LessonService;
 import com.eomcs.lms.service.PhotoBoardService;
+import com.eomcs.util.Component;
 import com.eomcs.util.Prompt;
 
+@Component("/photoboard/add")
 public class PhotoBoardAddServlet implements Servlet {
 
   PhotoBoardService photoBoardService;
   LessonService lessonService;
 
-  public PhotoBoardAddServlet(PhotoBoardService photoBoardService, LessonService lessonService) {
+  public PhotoBoardAddServlet(//
+      PhotoBoardService photoBoardService, //
+      LessonService lessonService) {
     this.photoBoardService = photoBoardService;
     this.lessonService = lessonService;
   }
 
   @Override
   public void service(Scanner in, PrintStream out) throws Exception {
+
     PhotoBoard photoBoard = new PhotoBoard();
     photoBoard.setTitle(Prompt.getString(in, out, "제목? "));
 

@@ -5,13 +5,16 @@ import java.util.Scanner;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
 import com.eomcs.lms.service.PhotoBoardService;
+import com.eomcs.util.Component;
 import com.eomcs.util.Prompt;
 
+@Component("/photoboard/detail")
 public class PhotoBoardDetailServlet implements Servlet {
 
   PhotoBoardService photoBoardService;
 
-  public PhotoBoardDetailServlet(PhotoBoardService photoBoardService) {
+  public PhotoBoardDetailServlet( //
+      PhotoBoardService photoBoardService) {
     this.photoBoardService = photoBoardService;
   }
 

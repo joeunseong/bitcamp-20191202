@@ -18,7 +18,7 @@ public class SqlSessionProxy implements SqlSession {
     this.original = original;
   }
 
-  // close() 메소드를 변경한다.
+  // close() 메서드를 변경한다.
   @Override
   public void close() {
     // try-with-resources 문장에서 자동으로 close()를 호출할 때
@@ -29,8 +29,8 @@ public class SqlSessionProxy implements SqlSession {
   }
 
   // 대신 스레드의 작업이 모두 끝났을 때 닫도록 한다.
-  // => 이를 진짜 닫는 일을 하는 메소드를 추가한다.
-  public void realCose() {
+  // => 이를 진짜 닫는 일을 하는 메서드를 추가한다.
+  public void realClose() {
     original.close();
   }
 
@@ -183,5 +183,6 @@ public class SqlSessionProxy implements SqlSession {
   public Connection getConnection() {
     return original.getConnection();
   }
+
 
 }

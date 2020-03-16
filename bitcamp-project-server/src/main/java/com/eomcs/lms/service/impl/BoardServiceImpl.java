@@ -4,8 +4,11 @@ import java.util.List;
 import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.service.BoardService;
+import com.eomcs.util.Component;
 
+@Component
 public class BoardServiceImpl implements BoardService {
+
   BoardDao boardDao;
 
   public BoardServiceImpl(BoardDao boardDao) {
@@ -18,8 +21,13 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
-  public List<Board> get() throws Exception {
+  public List<Board> list() throws Exception {
     return boardDao.findAll();
+  }
+
+  @Override
+  public int delete(int no) throws Exception {
+    return boardDao.delete(no);
   }
 
   @Override
@@ -30,10 +38,5 @@ public class BoardServiceImpl implements BoardService {
   @Override
   public int update(Board board) throws Exception {
     return boardDao.update(board);
-  }
-
-  @Override
-  public int delete(int no) throws Exception {
-    return boardDao.delete(no);
   }
 }

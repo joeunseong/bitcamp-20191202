@@ -4,8 +4,10 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.service.BoardService;
+import com.eomcs.util.Component;
 import com.eomcs.util.Prompt;
 
+@Component("/board/update")
 public class BoardUpdateServlet implements Servlet {
 
   BoardService boardService;
@@ -13,7 +15,6 @@ public class BoardUpdateServlet implements Servlet {
   public BoardUpdateServlet(BoardService boardService) {
     this.boardService = boardService;
   }
-
 
   @Override
   public void service(Scanner in, PrintStream out) throws Exception {
@@ -28,7 +29,11 @@ public class BoardUpdateServlet implements Servlet {
 
     Board board = new Board();
 
-    board.setTitle(Prompt.getString(in, out, String.format("제목(%s)? ", old.getTitle())));
+    board.setTitle(Prompt.getString(//
+        in, //
+        out, //
+        String.format("제목(%s)? ", old.getTitle()), //
+        old.getTitle()));
 
     board.setNo(no);
 

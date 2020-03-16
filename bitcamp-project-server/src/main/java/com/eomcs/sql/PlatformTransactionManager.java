@@ -32,7 +32,6 @@ public class PlatformTransactionManager {
 
   public void rollback() throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
-
     // 이 SqlSession 객체로 작업했던 모든 데이터 변경을 취소한다.
     sqlSession.rollback();
   }

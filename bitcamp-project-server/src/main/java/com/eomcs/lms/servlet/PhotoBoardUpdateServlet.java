@@ -7,14 +7,15 @@ import java.util.Scanner;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
 import com.eomcs.lms.service.PhotoBoardService;
+import com.eomcs.util.Component;
 import com.eomcs.util.Prompt;
 
+@Component("/photoboard/update")
 public class PhotoBoardUpdateServlet implements Servlet {
 
   PhotoBoardService photoBoardService;
 
   public PhotoBoardUpdateServlet(PhotoBoardService photoBoardService) {
-
     this.photoBoardService = photoBoardService;
   }
 
@@ -31,18 +32,19 @@ public class PhotoBoardUpdateServlet implements Servlet {
 
     PhotoBoard photoBoard = new PhotoBoard();
     photoBoard.setNo(no);
-    photoBoard.setTitle(
-        Prompt.getString(in, out, String.format("제목(%s)? ", old.getTitle()), old.getTitle()));
+    photoBoard.setTitle(Prompt.getString(in, out, //
+        String.format("제목(%s)? ", old.getTitle()), //
+        old.getTitle()));
 
     printPhotoFiles(out, old);
     out.println();
     out.println("사진은 일부만 변경할 수 없습니다.");
     out.println("전체를 새로 등록해야 합니다.");
 
-    String response = Prompt.getString(in, out, "사진을 변경하시겠습니까?(y/N) ");
+    String response = Prompt.getString(in, out, //
+        "사진을 변경하시겠습니까?(y/N) ");
 
     if (response.equalsIgnoreCase("y")) {
-      // 사용자가 입력한 파일 목록을 PhotoBoard 객체에 저장한다.
       photoBoard.setFiles(inputPhotoFiles(in, out));
     }
 

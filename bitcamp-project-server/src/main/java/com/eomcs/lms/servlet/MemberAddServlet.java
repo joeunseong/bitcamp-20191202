@@ -4,8 +4,10 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.service.MemberService;
+import com.eomcs.util.Component;
 import com.eomcs.util.Prompt;
 
+@Component("/member/add")
 public class MemberAddServlet implements Servlet {
 
   MemberService memberService;
@@ -23,8 +25,11 @@ public class MemberAddServlet implements Servlet {
     member.setPhoto(Prompt.getString(in, out, "사진? "));
     member.setTel(Prompt.getString(in, out, "전화? "));
 
-    memberService.add(member);
-    out.println("회원을 저장했습니다.");
+    if (memberService.add(member) > 0) {
+      out.println("회원을 저장했습니다.");
 
+    } else {
+      out.println("저장에 실패했습니다.");
+    }
   }
 }

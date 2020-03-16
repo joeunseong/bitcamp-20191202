@@ -4,14 +4,12 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.service.LessonService;
+import com.eomcs.util.Component;
 import com.eomcs.util.Prompt;
 
+@Component("/lesson/update")
 public class LessonUpdateServlet implements Servlet {
 
-  // DAO 클래스를 구체적으로 지정하기 보다는
-  // 인터페이스를 지정함으로써
-  // 향후 다른 구현체로 교체하기 쉽도록 한다.
-  //
   LessonService lessonService;
 
   public LessonUpdateServlet(LessonService lessonService) {
@@ -32,7 +30,8 @@ public class LessonUpdateServlet implements Servlet {
     Lesson lesson = new Lesson();
 
     lesson.setNo(no);
-    lesson.setTitle(Prompt.getString(in, out, String.format("강의명(%s)? ", old.getTitle())));
+    lesson.setTitle(Prompt.getString(in, out, //
+        String.format("강의명(%s)? ", old.getTitle())));
     lesson.setDescription(Prompt.getString(in, out, //
         String.format("내용(%s)? ", old.getDescription())));
     lesson.setStartDate(Prompt.getDate(in, out, //

@@ -25,7 +25,7 @@ public class SqlSessionFactoryProxy implements SqlSessionFactory {
     if (sqlSession != null) {
       sqlSessionLocal.remove(); // 스레드에서 제거
       // 이제 진짜로 SqlSession을 닫는다.
-      ((SqlSessionProxy) sqlSession).close();
+      ((SqlSessionProxy) sqlSession).realClose();
     }
   }
 
@@ -41,8 +41,7 @@ public class SqlSessionFactoryProxy implements SqlSessionFactory {
     SqlSession sqlSession = sqlSessionLocal.get();
 
     if (sqlSession == null) {
-      // 스레드에 보관된게 없다면 새로 만든다.
-      // close를 하지 않기 위해서 new SqlSessionProxy() 새객체에 넣어줌
+      // 스레드에 보관된 게 없다면 새로 만든다.
       sqlSession = new SqlSessionProxy(originalFactory.openSession(autoCommit));
 
       // 나중에 다른 곳에서 사용하도록 스레드에 보관한다.

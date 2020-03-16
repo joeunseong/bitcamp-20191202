@@ -4,8 +4,10 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.service.LessonService;
+import com.eomcs.util.Component;
 import com.eomcs.util.Prompt;
 
+@Component("/lesson/add")
 public class LessonAddServlet implements Servlet {
 
   LessonService lessonService;
@@ -25,7 +27,11 @@ public class LessonAddServlet implements Servlet {
     lesson.setTotalHours(Prompt.getInt(in, out, "총 강의시간? "));
     lesson.setDayHours(Prompt.getInt(in, out, "일 강의시간? "));
 
-    lessonService.add(lesson);
-    out.println("강의를 저장했습니다.");
+    if (lessonService.add(lesson) > 0) {
+      out.println("강의를 저장했습니다.");
+
+    } else {
+      out.println("저장에 실패했습니다.");
+    }
   }
 }
