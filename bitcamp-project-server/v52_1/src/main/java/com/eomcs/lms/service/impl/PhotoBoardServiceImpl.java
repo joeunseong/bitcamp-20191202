@@ -27,9 +27,9 @@ public class PhotoBoardServiceImpl implements PhotoBoardService {
   }
 
   // @Transactional
-  // => 메소드 전체를 트랜잭션으로 묶는다.
-  // => 예외 없이 실행하면 자동으로 커밋한다.
-  // => 예외가 발생하면 자동으로 롤백한다.
+  // => 메서드 전체를 트랜잭션으로 묶는다.
+  // => 예외 없이 실행하면 자동으로 commit() 한다.
+  // => 예외가 발생하면 자동으로 rollback() 한다.
   @Transactional
   @Override
   public void add(PhotoBoard photoBoard) throws Exception {
