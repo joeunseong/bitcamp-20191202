@@ -22,10 +22,6 @@ import com.eomcs.sql.SqlSessionFactoryProxy;
 @ComponentScan(value = "com.eomcs.lms")
 public class AppConfig {
 
-  public AppConfig() throws Exception {
-
-  }
-
   // Spring IoC 컨테이너에 수동으로 객체를 등록하고 싶다면,
   // 그 객체를 만들어주는 팩토리 메소드를 정의해야 한다.
   // 메소드를 만들어 리턴한다.

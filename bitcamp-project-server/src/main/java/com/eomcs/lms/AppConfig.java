@@ -1,11 +1,15 @@
 package com.eomcs.lms;
 
 import java.io.InputStream;
+import javax.sql.DataSource;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.dao.MemberDao;
@@ -20,17 +24,32 @@ import com.eomcs.sql.SqlSessionFactoryProxy;
 // @Component 애노테이션이 붙은 클래스를 찾아 객체를 생성한다.
 //
 @ComponentScan(value = "com.eomcs.lms")
+
+// Spring IoC 컨테이너에서 사용할 Properties 파일을 로딩하기
+@PropertySource("classpath:com/eomcs/lms/conf/jdbc.properties")
+
 public class AppConfig {
 
-  public AppConfig() throws Exception {
+  // @PropertieSource로 로딩한 .properties 파일의 값을 사용하고 싶다면,
 
-  }
+  @Value("${jdbc.driver}")
+  String jdbcDriver;
 
   // Spring IoC 컨테이너에 수동으로 객체를 등록하고 싶다면,
   // 그 객체를 만들어주는 팩토리 메소드를 정의해야 한다.
   // 메소드를 만들어 리턴한다.
   // => 단 메소드 선언부에 @Bean 애노테이션을 붙여야 한다.
   // => 그래야만 Spring IoC 컨테이너는 이 메소드를 호출하고 그 리턴 값을 보관한다.
+
+  @Bean
+  public DataSource dataSource() {
+    DriverManagerDataSource ds = new DriverManagerDataSource();
+    ds.setDriverClassName(driverClassName);
+    ds.setUrl(url);
+    ds.setUsername(username);
+    ds.setPassword(password);
+    return ds;
+  }
 
   @Bean
   public SqlSessionFactoryProxy sqlSessionFactory() throws Exception {
