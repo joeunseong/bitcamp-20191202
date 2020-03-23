@@ -2,7 +2,6 @@ package com.eomcs.spring.ioc.ex08.g;
 
 import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.eomcs.spring.ioc.ex08.Engine;
 
 // 의존 객체 Engine 주입 - 필수 또는 선택
 public class Car {
