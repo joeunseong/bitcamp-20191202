@@ -233,7 +233,7 @@ public class ServerApp {
 
   private Map<String, String> getParameters(String requestUri) throws Exception {
     // 데이터(Query String)는 따로 저장
-    // => /member/list?email=aaaa@test.com&name=aaaa&password=1111
+    // => /member/list?email=aaa@test.com&name=aaa&password=1111
     Map<String, String> params = new HashMap<>();
     String[] items = requestUri.split("\\?");
     if (items.length > 1) {
@@ -242,10 +242,16 @@ public class ServerApp {
       for (String entry : entries) {
         logger.debug(String.format("parameter => %s", entry));
         String[] kv = entry.split("=");
-        // 웹브라우저가 URL 인코딩하여 보낸 데이터를
-        // 디코딩하여 String 객체로 만든다.
-        String value = URLDecoder.decode(kv[1], "UTF-8");
-        params.put(kv[0], value);
+
+        if (kv.length > 1) {
+          // 웹브라우저가 URL 인코딩하여 보낸 데이터를
+          // 디코딩하여 String 객체로 만든다.
+          String value = URLDecoder.decode(kv[1], "UTF-8");
+
+          params.put(kv[0], value);
+        } else {
+          params.put(kv[0], "");
+        }
       }
     }
     return params;
