@@ -1,6 +1,6 @@
 package com.eomcs.lms.servlet;
 
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.Map;
 import org.springframework.stereotype.Component;
 import com.eomcs.lms.domain.Board;
@@ -17,7 +17,7 @@ public class BoardUpdateServlet {
   }
 
   @RequestMapping("/board/update")
-  public void service(Map<String, String> params, PrintStream out) throws Exception {
+  public void service(Map<String, String> params, PrintWriter out) throws Exception {
 
     Board board = new Board();
     board.setNo(Integer.parseInt(params.get("no")));
