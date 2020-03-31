@@ -1,80 +1,54 @@
-# 54_2 - 출력 콘텐트에 HTML 형식 적용하기
+# 55_1 - JavaEE 의 Servlet 기술 도입하기
 
 ## 학습목표
 
-- HTML 태그를 사용할 수 있다.
+- JavaEE/JavaSE/JavaME 기술의 특징을 이해한다.
+- JavaEE 기술의 용도의 버전에 대해 이해한다.
+- JavaEE Implements(WAS; Web Application Server)의 상용버전과 무료버전을 안다.
+- JavaEE 버전과 WAS 버전의 관계를 이해한다.
+- Tomcat 서블릿 컨테이너를 설치하고 설정할 수 있다.
+- Servlet 기술에 따라 클라이언트 요청을 처리할 클래스를 만들 수 있다.
+- 웹 애플리케이션을 서블릿 컨테이너에 배치할 수 있다.
+- 웹 애플리케이션을 실행할 수 있다.
 
 ## 실습 소스 및 결과
 
-- src/main/java/com/eomcs/lms/servlet/BoardXxxServlet.java 변경
-- src/main/java/com/eomcs/lms/servlet/MemberXxxServlet.java 변경
-- src/main/java/com/eomcs/lms/servlet/LessonXxxServlet.java 변경
-- src/main/java/com/eomcs/lms/servlet/PhotoBoardXxxServlet.java 변경
+- build.gradle 변경
 - src/main/java/com/eomcs/lms/ServerApp.java 변경
+- src/main/java/com/eomcs/lms/servlet/XxxServlet.java 변경
 
 ## 실습  
 
-### 훈련1: 게시글 목록을 출력할 때 HTML 형식으로 콘텐트를 출력한다.
+### 훈련1: 서블릿 컨테이너를 설치 및 설정한다.
 
-- com.eomcs.lms.servlet.BoardListServlet 변경
+- tomcat.apache.org 사이트에서 서블릿 컨테이너를 다운로드 받는다.
+- 특정 폴더에 압축을 풀고, 설정한다.
+  - 관리자 ID/PWD를 등록한다.
+    - $톰캣홈/conf/tomcat-users.xml
+  - 관리자 로그인을 활성화시킨다.
+    - $톰캣홈/conf/Catalina/localhost/manager.xml
+- 톰캣 서버를 실행하고 웹 브라우저를 통해 접속 확인한다.
 
-### 훈련2: 웹브라우저에게 게시글 데이터 입력을 요구한다.
+### 훈련2: JavaEE Servlet 기술을 사용하기 위한 라이브러리를 프로젝트에 적용한다.
 
-- com.eomcs.lms.servlet.BoardAddFormServlet 추가
-  - 웹브라우저에게 게시글 데이터 입력을 요구하는 HTML을 보낸다.
-- com.eomcs.lms.servlet.BoardListServlet 변경
-  - /board/addForm 을 요청하는 링크를 추가한다.
+- build.gradle 변경
+  - search.maven.org 에서 'servlet-api'를 검색한다.
+  - 의존 라이브러리 블록에 추가한다.
+  - 의존 라이브러리 옵션은 compileOnly로 설정한다.
+  - 왜? 'servlet-api'는 컴파일할 때만 사용할 것이기 때문이다. 
+- 'gradle eclipse' 실행
+  - 이클립스 설정 파일을 갱신한다.
+- 이클립스 IDE의 프로젝트를 refresh 한다.
+
+### 훈련3: JavaEE의 Servlet 기술을 사용하여 Spring IoC 컨테이너를 준비한다.
+
+- com.eomcs.lms.ContextLoaderListener 변경
+  - Servlet 기술에게 제공하는 ServletContextListener를 구현한다.
+  - Spring IoC 컨테이너를 준비한다. 
+- com.eomcs.lms.context 패키지 및 하위 클래스 삭제
+
+### 훈련4: 기존의 서블릿 클래스를 JavaEE의 Servlet 기술을 적용하여 변경한다.
+
+- com.eomcs.lms.servlet.XxxServlet.java 변경
 
 
-### 훈련3: 웹브라우저가 보낸 데이터 받기
-
-- com.eomcs.lms.ServerApp 변경
-  - request-uri에서 자원의 경로와 데이터를 분리한다.
-  - 예) /board/add?title=aaaa
-  - 자원의 경로: /board/add
-  - 데이터: title=aaaa
-
-### 훈련4: 웹브라우저가 보낸 게시글 데이터 저장하기
-
-- com.eomcs.lms.servlet.BoardAddServlet 변경
-  - 웹브라우저가 보낸 게시글을 입력한다.
-  - 웹브라우저에게 게시글 입력 결과를 보낸다.
-
-### 훈련5: 게시글 상세 정보를 출력하기
-
-- com.eomcs.lms.servlet.BoardDetailServlet 변경
-  - 웹브라우저가 보낸 번호의 게시글을 가져온다.
-  - 웹브라우저에게 게시글 상세 정보를 HTML 형식으로 만들어 보낸다.
-- com.eomcs.lms.servlet.BoardListServlet 변경
-  - /board/detail 을 요청하는 링크를 추가한다.  
-  
-### 훈련6: 게시글 삭제하기
-
-- com.eomcs.lms.servlet.BoardDeleteServlet 변경
-  - 웹브라우저가 보낸 번호의 게시글을 삭제한다.
-  - 웹브라우저에게 게시글 삭제 결과를 HTML 형식으로 만들어 보낸다.
-- com.eomcs.lms.servlet.BoardDetailServlet 변경
-  - /board/delete 을 요청하는 링크를 추가한다.
-  
-### 훈련7: 게시글 변경폼 만들기
-
-- com.eomcs.lms.servlet.BoardDetailServlet 변경
-  - /board/updateForm 을 요청하는 링크를 추가한다.
-- com.eomcs.lms.servlet.BoardUpdateFormServlet 추가
-  - 웹브라우저에게 게시글 데이터 변경을 요구하는 HTML을 보낸다.
-
-### 훈련8: 게시글 변경하기
-
-- com.eomcs.lms.servlet.BoardUpdateServlet 변경
-  - 웹브라우저가 보낸 게시글을 변경한다.
-  - 웹브라우저에게 게시글 변경 결과를 보낸다.
-  
-### 훈련9: 회원 관리 서블릿을 모두 변경하기
-
-### 훈련10: 수업 관리 서블릿을 모두 변경하기
-
-### 훈련11: 사진게시글 관리 서블릿을 모두 변경하기
-
-### 훈련12: 로그인 서블릿을 모두 변경하기
-  
-  
