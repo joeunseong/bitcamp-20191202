@@ -1,5 +1,5 @@
 // 클라이언트가 보낸 데이터 읽기 - POST 요청 데이터 읽기
-package bitcamp.ex04;
+package com.eomcs.web.ex04;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -55,13 +55,18 @@ public class Servlet02 extends GenericServlet {
     //
     req.setCharacterEncoding("UTF-8");
 
-    int age = Integer.parseInt(req.getParameter("age"));
+    String age = req.getParameter("age");
     String name = req.getParameter("name");
     
     res.setContentType("text/plain;charset=UTF-8");
     PrintWriter out = res.getWriter();
     out.printf("이름=%s\n", name);
-    out.printf("나이=%d\n", age);
+    out.printf("나이=%s\n", age);
+    out.println("-------------------------");
+    char[] chars = name.toCharArray();
+    for(char c : chars) {
+      out.printf("%x\n", (int) c);
+    }
   }
 }
 
@@ -75,24 +80,24 @@ public class Servlet02 extends GenericServlet {
 // => POST 요청은 데이터를 message-body에 붙여서 보낸다.
 // => 데이터 형식과 URL 인코딩은 GET 요청과 같다.
 // => 예)
-/*
-POST /java-web/ex04/s2 HTTP/1.1
-Host: localhost:8080
-Connection: keep-alive
-Content-Length: 33
-Pragma: no-cache
-Cache-Control: no-cache
-Origin: http://localhost:8080
-Upgrade-Insecure-Requests: 1
-Content-Type: application/x-www-form-urlencoded
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,
-Referer: http://localhost:8080/java-web/ex04/test02.html
-Accept-Encoding: gzip, deflate, br
-Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6
-빈 줄
-name=ABC%EA%B0%80%EA%B0%81&age=20
- */
+
+// POST /java-web/ex04/s2 HTTP/1.1
+// Host: localhost:8080
+// Connection: keep-alive
+// Content-Length: 33
+// Pragma: no-cache
+// Cache-Control: no-cache
+// Origin: http://localhost:8080
+// Upgrade-Insecure-Requests: 1
+// Content-Type: application/x-www-form-urlencoded
+// User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36
+// Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,
+// Referer: http://localhost:8080/java-web/ex04/test02.html
+// Accept-Encoding: gzip, deflate, br
+// Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7,la;q=0.6
+// 빈 줄
+// name=ABC%EA%B0%80%EA%B0%81&age=20
+
 
 // GET 요청 vs POST 요청
 // 1) 전송 데이터 용량
