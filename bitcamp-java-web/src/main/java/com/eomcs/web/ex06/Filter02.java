@@ -1,5 +1,5 @@
 // 필터 초기화 파라미터 : 애노테이션으로 설정한 값 가져오기
-package bitcamp.ex06;
+package com.eomcs.web.ex06;
 
 import java.io.IOException;
 import javax.servlet.Filter;
