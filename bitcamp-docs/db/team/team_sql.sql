@@ -3,10 +3,16 @@ insert into users(user_no, user_name, birthday, gender, email, password, phone_n
                   basic_address, detail_address, photo, nickname) 
   values(101, '김명랑', '1990-03-09', 1, 'aaa@aaa.com', '1111', '010-2222-3333', 12194, 
         '강원도 영월군 주천면 평창강로 59','101호', 'a.gif', 'haha');
+        
+insert into users(user_no, user_name, birthday, gender, email, password, phone_number, zip_code,
+                  basic_address, detail_address, photo, nickname) 
+  values(102, '이발랄', '1993-12-20', 2, 'bbb@bbb.com', '1111', '010-5555-3333', 12135, 
+        '강원도 춘천시 금강로 75-1','301호', 'g.gif', 'lala');
+
 
 -- 포인트 내역
 insert into points(point_no, user_no, trader_no, point_type, content, price) 
-  values(101,101,151,2,'스크랩',100);
+  values(101, 101, 102, 2, 1, 100);
   
 -- 코스
 insert into courses(course_no, user_no) value(101,101);
@@ -94,12 +100,26 @@ insert into review_place(review_place_no, place_name, place_address, place_revie
   values(108, '남산서울타워', '서울 용산구 남산공원길 103 서울타워우편물취급소', '남산은 워낙 
       유명해서 가보신 분들이 많을텐데 전망대도 올라가 보시는거 진짜 추천드려요!! 야경이 진짜 이쁩니다!!', 'v.png', 3, 1);
 
+-- 장소리뷰사진
+insert into review_place_photo(photo_no, review_place_no, photo_file) values(101, 101, 'a.gif');
+
+-- 인포장소
+insert into info_places(place_no, start_date, last_date, place_name, place_address)
+  values(110, '2020-03-31', '2020-04-20', '석촌호수', '서울 송파구 잠실동');
   
 -- 인포(인포 중 이벤트)
 insert into infos(info_no, category, content, main_photo, place_no) 
   values(101, 2, '석촌호수', 'p.png', 110);
   
--- 인포장소
-insert into info_places(place_no, start_date, last_date, place_name, place_address)
-  values(110, '2020-03-31', '2020-04-20', '석촌호수', '서울 송파구 잠실동');
+-- 인포 사진
+insert into info_photo(photo_no, info_no, photo_file)   values(101, 101, 'm.gif');
   
+-- 유저장소스크랩
+insert into place_scraps(user_no, review_place_no) values(101, 101);
+
+-- 유저데이스크랩
+insert into day_scraps(user_no, review_day_no) values(101, 1);
+
+-- 유저 인포장소 스크랩
+insert into info_scraps(user_no, place_no) values(101, 110);
+
