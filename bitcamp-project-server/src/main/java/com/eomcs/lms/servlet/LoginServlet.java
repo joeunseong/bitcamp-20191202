@@ -31,15 +31,18 @@ public class LoginServlet extends HttpServlet {
       out.println("</head>");
       out.println("<body>");
       out.println("<h1>로그인</h1>");
-      out.println("<form action='../auth/login' method='post'>");
+      out.println("<form action='login' method='post'>");
       out.println("이메일: <input name='email' type='email'><br>");
       out.println("암호: <input name='password' type='password'><br>");
       out.println("<button>로그인</button>");
       out.println("</form>");
       out.println("</body>");
       out.println("</html>");
+
     } catch (Exception e) {
-      throw new ServletException(e);
+      request.setAttribute("error", e);
+      request.setAttribute("url", "list");
+      request.getRequestDispatcher("/error").forward(request, response);
     }
   }
 
@@ -55,7 +58,6 @@ public class LoginServlet extends HttpServlet {
           (ApplicationContext) servletContext.getAttribute("iocContainer");
       MemberService memberService = iocContainer.getBean(MemberService.class);
 
-
       String email = request.getParameter("email");
       String password = request.getParameter("password");
 
@@ -68,7 +70,7 @@ public class LoginServlet extends HttpServlet {
       if (member != null) {
         out.println("<meta http-equiv='refresh' content='2;url=../board/list'>");
       } else {
-        out.println("<meta http-equiv='refresh' content='2;url=../auth/loginForm'>");
+        out.println("<meta http-equiv='refresh' content='2;url=login'>");
       }
       out.println("<title>로그인</title>");
       out.println("</head>");
@@ -84,7 +86,9 @@ public class LoginServlet extends HttpServlet {
       out.println("</body>");
       out.println("</html>");
     } catch (Exception e) {
-      throw new ServletException(e);
+      request.setAttribute("error", e);
+      request.setAttribute("url", "login");
+      request.getRequestDispatcher("/error").forward(request, response);
     }
   }
 }

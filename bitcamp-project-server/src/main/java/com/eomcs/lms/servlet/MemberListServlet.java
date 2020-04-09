@@ -68,13 +68,15 @@ public class MemberListServlet extends HttpServlet {
 
       out.println("<hr>");
 
-      out.println("<form action='search'>");
+      out.println("<form action='search' method='get'>");
       out.println("검색어: <input name='keyword' type='text'>");
       out.println("<button>검색</button>");
       out.println("</body>");
       out.println("</html>");
     } catch (Exception e) {
-      throw new ServletException(e);
+      request.setAttribute("error", e);
+      request.setAttribute("url", "list");
+      request.getRequestDispatcher("/error").forward(request, response);
     }
   }
 }

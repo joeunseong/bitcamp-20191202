@@ -18,7 +18,7 @@ public class BoardListServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected void doGet(HttpServletRequest requset, HttpServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
       response.setContentType("text/html;charset=UTF-8");
@@ -28,14 +28,8 @@ public class BoardListServlet extends HttpServlet {
       ApplicationContext iocContainer =
           (ApplicationContext) servletContext.getAttribute("iocContainer");
       BoardService boardService = iocContainer.getBean(BoardService.class);
+      request.getRequestDispatcher("/header").include(request, response);
 
-      out.println("<!DOCTYPE html>");
-      out.println("<html>");
-      out.println("<head>");
-      out.println("  <meta charset='UTF-8'>");
-      out.println("  <title>게시글 목록</title>");
-      out.println("</head>");
-      out.println("<body>");
       out.println("  <h1>게시글</h1>");
       out.println("  <a href='add'>새 글</a><br>");
       out.println("  <table border='1'>");
@@ -62,11 +56,12 @@ public class BoardListServlet extends HttpServlet {
         );
       }
       out.println("</table>");
+      request.getRequestDispatcher("/footer").include(request, response);
 
-      out.println("</body>");
-      out.println("</html>");
     } catch (Exception e) {
-      throw new ServletException(e);
+      request.setAttribute("error", e);
+      request.setAttribute("url", "list");
+      request.getRequestDispatcher("/error").forward(request, response);
     }
   }
 }
