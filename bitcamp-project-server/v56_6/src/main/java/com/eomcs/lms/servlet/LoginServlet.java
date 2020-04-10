@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
           }
         }
       }
+
       response.setContentType("text/html;charset=UTF-8");
       PrintWriter out = response.getWriter();
 
@@ -39,7 +40,7 @@ public class LoginServlet extends HttpServlet {
       out.println("<h1>로그인</h1>");
       out.println("<form action='login' method='post'>");
       out.printf("이메일: <input name='email' type='email' value='%s'>\n", email);
-      out.println("<input type='checkbox' name='saveEmail'>이메일 저장해두기<br>");
+      out.println("<input type='checkbox' name='saveEmail'> 이메일 저장해두기<br>");
       out.println("암호: <input name='password' type='password'><br>");
       out.println("<button>로그인</button>");
       out.println("</form>");
@@ -75,7 +76,6 @@ public class LoginServlet extends HttpServlet {
       } else {
         cookie.setMaxAge(0);
       }
-
       response.addCookie(cookie);
 
       Member member = memberService.get(email, password);
