@@ -48,7 +48,7 @@ public class HeaderServlet extends HttpServlet {
     out.println("<div class='collapse navbar-collapse' id='navbarNav'>");
     out.println("  <ul class='navbar-nav mr-auto'>");
     out.println("    <li class='nav-item'>");
-    out.println("      <a class='nav-link' href='../board/list'>게시글</span></a>");
+    out.println("      <a class='nav-link' href='../board/list'>게시글</a>");
     out.println("    </li>");
     out.println("    <li class='nav-item'>");
     out.println("      <a class='nav-link' href='../lesson/list'>수업</a>");
