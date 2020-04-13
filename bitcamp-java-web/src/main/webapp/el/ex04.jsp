@@ -19,7 +19,7 @@
 정수: ${100}<br>
 부동소수점: ${3.14}<br>
 논리값: ${true}<br>
-null: ${null}<br>
+null: ${null}<br> 
 
 </body>
 </html>

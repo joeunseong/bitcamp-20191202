@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ex06</title>
+<title>ex06 </title>
 </head>
 <%!
+
+
 // 다음과 같이 상속 받은 메서드를 오버라이딩 할 수 있다.
 public void jspInit() {
   System.out.println("ex06.jsp의 jspInit()");
