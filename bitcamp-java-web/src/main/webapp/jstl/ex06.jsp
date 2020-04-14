@@ -18,6 +18,11 @@
 
 <c:set var="name" value="홍길동"/>
 <c:set var="age" value="26"/>
+<%--
+pageContext.setAttribute("name", "홍길동");
+pageContext.setAttribute("age", "26");
+
+ --%>
 
 <c:choose>
     <c:when test="${age < 19}">

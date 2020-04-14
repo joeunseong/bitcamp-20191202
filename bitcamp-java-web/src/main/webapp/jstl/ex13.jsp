@@ -22,8 +22,10 @@ pageContext.setAttribute("today", new Date());
 
 <fmt:formatDate value="${pageScope.today}" 
     pattern="yyyy-MM-dd"/><br>
+    
 <fmt:formatDate value="${pageScope.today}" 
     pattern="MM/dd/yyyy"/><br>
+    
 <fmt:formatDate value="${pageScope.today}" 
     pattern="yyyy-MM-dd hh:mm:ss"/><br>
     
