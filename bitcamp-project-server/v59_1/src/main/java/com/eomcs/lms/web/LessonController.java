@@ -30,7 +30,7 @@ public class LessonController {
 
   @RequestMapping("/lesson/delete")
   public String delete(int no) throws Exception {
-    if (lessonService.delete(no) > 0) {
+    if (lessonService.delete(no) > 0) { // 삭제했다면,
       return "redirect:list";
     } else {
       throw new Exception("삭제할 수업 번호가 유효하지 않습니다.");
@@ -61,6 +61,7 @@ public class LessonController {
   @RequestMapping("/lesson/search")
   public String search(Lesson lesson, Map<String, Object> model) throws Exception {
     HashMap<String, Object> map = new HashMap<>();
+
     if (lesson.getTitle().length() > 0) {
       map.put("title", lesson.getTitle());
     }

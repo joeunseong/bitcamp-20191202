@@ -13,9 +13,10 @@ import com.eomcs.lms.service.BoardService;
 @Controller
 public class BoardController {
 
+  static Logger logger = LogManager.getLogger(BoardController.class);
+
   @Autowired
   BoardService boardService;
-  static Logger logger = LogManager.getLogger(BoardController.class);
 
   public BoardController() {
     logger.debug("BoardController 생성됨!");

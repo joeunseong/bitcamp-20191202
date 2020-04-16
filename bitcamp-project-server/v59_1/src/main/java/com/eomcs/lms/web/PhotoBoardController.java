@@ -31,8 +31,9 @@ public class PhotoBoardController {
   }
 
   @RequestMapping("/photoboard/add")
-  public String add(int lessonNo, String title, Part[] photoFiles, HttpServletRequest request)
-      throws Exception {
+  public String add(//
+      int lessonNo, String title, Part[] photoFiles, //
+      HttpServletRequest request) throws Exception {
     Lesson lesson = lessonService.get(lessonNo);
     if (lesson == null) {
       throw new Exception("수업 번호가 유효하지 않습니다.");
@@ -61,6 +62,7 @@ public class PhotoBoardController {
     photoBoardService.add(photoBoard);
 
     return "redirect:list?lessonNo=" + lessonNo;
+
   }
 
   @RequestMapping("/photoboard/delete")
@@ -68,7 +70,6 @@ public class PhotoBoardController {
     photoBoardService.delete(no);
     return "redirect:list?lessonNo=" + lessonNo;
   }
-
 
   @RequestMapping("/photoboard/detail")
   public String detail(int no, Map<String, Object> model) throws Exception {
@@ -90,8 +91,10 @@ public class PhotoBoardController {
   }
 
   @RequestMapping("/photoboard/update")
-  public String update(int no, String title, Part[] photoFiles, HttpServletRequest request)
-      throws Exception {
+  public String update(//
+      int no, String title, Part[] photoFiles, //
+      HttpServletRequest request) throws Exception {
+
     PhotoBoard photoBoard = photoBoardService.get(no);
     photoBoard.setTitle(title);
 

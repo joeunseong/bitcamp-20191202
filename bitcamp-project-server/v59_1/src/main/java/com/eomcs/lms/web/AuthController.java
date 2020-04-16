@@ -30,12 +30,12 @@ public class AuthController {
     }
     model.put("email", email);
     return "/auth/form.jsp";
-
   }
 
   @RequestMapping("/auth/login")
-  public String login(HttpServletRequest request, String email, String password, String saveEmail)
-      throws Exception {
+  public String login(HttpServletRequest request, //
+      String email, String password, String saveEmail) throws Exception {
+
     Cookie cookie = new Cookie("email", email);
     if (saveEmail != null) {
       cookie.setMaxAge(60 * 60 * 24 * 30);

@@ -1,6 +1,5 @@
 package com.eomcs.lms.web;
 
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +39,7 @@ public class MemberController {
 
   @RequestMapping("/member/delete")
   public String delete(int no) throws Exception {
-    if (memberService.delete(no) > 0) {
+    if (memberService.delete(no) > 0) { // 삭제했다면,
       return "redirect:list";
     } else {
       throw new Exception("삭제할 회원 번호가 유효하지 않습니다.");
@@ -56,15 +55,12 @@ public class MemberController {
 
   @RequestMapping("/member/list")
   public String list(Map<String, Object> model) throws Exception {
-    List<Member> members = memberService.list();
-    model.put("list", members);
+    model.put("list", memberService.list());
     return "/member/list.jsp";
   }
 
   @RequestMapping("/member/search")
   public String search(String keyword, Map<String, Object> model) throws Exception {
-    // List<Member> members = memberService.search(keyword);
-    // model.put("list", members);
     model.put("list", memberService.search(keyword));
     return "/member/search.jsp";
   }
