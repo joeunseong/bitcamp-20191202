@@ -69,15 +69,18 @@ public class ContextLoaderListener implements ServletContextListener {
         Iterator<Method> handlers = getRequestHandlers(component.getClass());
         while (handlers.hasNext()) {
           // 클라이언트 명령을 처리하는 메서드 정보를 준비한다.
-          RequestHandler requestHandler = new RequestHandler(handlers.next(), component);
+          RequestHandler requestHandler = //
+              new RequestHandler(handlers.next(), component);
 
           // 명령을 처리할 메서드를 찾을 수 있도록
           // 명령 이름으로 메서드 정보를 저장한다.
           handlerMapper.addHandler(requestHandler.getPath(), requestHandler);
 
           // @RequestMapping 메서드가 들어있는 클래스 이름을 로그로 남긴다.
-          logger.debug(String.format("%s==> %s,%s()", requestHandler.getPath(),
-              component.getClass().getName(), requestHandler.getMethod().getName()));
+          logger.debug(String.format("%s ==> %s.%s()", //
+              requestHandler.getPath(), //
+              component.getClass().getName(), //
+              requestHandler.getMethod().getName()));
         }
       }
 
@@ -112,7 +115,6 @@ public class ContextLoaderListener implements ServletContextListener {
         handlers.add(m);
       }
     }
-
     return handlers.iterator();
   }
 
