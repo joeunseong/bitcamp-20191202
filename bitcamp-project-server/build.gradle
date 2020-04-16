@@ -26,6 +26,9 @@ repositories {
 }
 
 dependencies {
+  // Reflection API를 좀 더 쉽게 사용하게 도와주는 유틸리티
+  implementation 'org.reflections:reflections:0.9.12'
+  
   // log4j 1.2.x 라이브러리
   //implementation 'log4j:log4j:1.2.17'
   
@@ -66,7 +69,7 @@ dependencies {
   
   // JSTL API 및 구현 라이브러리
   implementation 'jstl:jstl:1.2'
-    
+  
   implementation 'com.google.guava:guava:28.0-jre'
   testImplementation 'junit:junit:4.12'
 }
