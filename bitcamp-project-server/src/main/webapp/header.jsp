@@ -28,7 +28,7 @@ div.container {
 <div class='collapse navbar-collapse' id='navbarNav'>
   <ul class='navbar-nav mr-auto'>
     <li class='nav-item'>
-      <a class='nav-link' href='../board/list'>게시글</span></a>
+      <a class='nav-link' href='../board/list'>게시글</a>
     </li>
     <li class='nav-item'>
       <a class='nav-link' href='../lesson/list'>수업</a>
@@ -36,16 +36,13 @@ div.container {
     <li class='nav-item'>
       <a class='nav-link' href='../member/list'>회원</a>
     </li>
-    <li class='nav-item'>
-      <a class='nav-link' href='../auth/login'>로그인</a>
-    </li>
   </ul>
 <c:if test="${not empty loginUser}">
   <span class='navbar-text'>${loginUser.name}</span>
   <a href='../auth/logout' class='btn btn-success btn-sm'>로그아웃</a>
 </c:if>
 <c:if test="${empty loginUser}">
-  <a href='../auth/login' class='btn btn-success btn-sm'>로그인</a>
+  <a href='../auth/form' class='btn btn-success btn-sm'>로그인</a>
 </c:if> 
 </div>
 </nav>
