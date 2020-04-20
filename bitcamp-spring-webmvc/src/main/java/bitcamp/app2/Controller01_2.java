@@ -2,6 +2,7 @@
 package bitcamp.app2;
 
 import java.util.HashMap;
+
 import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,7 +56,7 @@ public class Controller01_2 {
     //      "/WEB-INF/jsp2/c01_2/h1.jsp"
     //    이다.
     //
-    return "c01_2/h1";
+    return "c01_2/h1"; // => /WEB-INF/jsp2/c01_2/h1.jsp
   }
 
   // 테스트:

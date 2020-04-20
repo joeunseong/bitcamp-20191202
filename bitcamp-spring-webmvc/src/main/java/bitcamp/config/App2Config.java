@@ -36,8 +36,11 @@ public class App2Config implements WebMvcConfigurer {
   @Bean
   public ViewResolver viewResolver() {
     InternalResourceViewResolver vr = new InternalResourceViewResolver(
-        "/WEB-INF/jsp2/", ".jsp");
-    return vr;
+        "/WEB-INF/jsp2/", //prefix 
+        ".jsp"); // suffix
+    return vr; 
+    // => preifix + 페이지 컨트롤러 리턴 값 + suffix
+    // 예)  "/WEB-INF/jsp2/" + board/list + ".jsp" = "/WEB-Inf/jsp2/board/list.js
   }
   
   // @MatrixVariable 애노테이션을 처리를 활성화시킨다.

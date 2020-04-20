@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class Controller05_3 {
 
   // 테스트:
-  //   http://localhost:8080/java-spring-webmvc/app1/c05_3/h1
+  //   http://localhost:9999/bitcamp-spring-webmvc/app1/c05_3/h1
   @GetMapping("h1") 
   public String handler1(
       ServletRequest request) {
@@ -28,9 +28,9 @@ public class Controller05_3 {
   }
 
   // 테스트:
-  //   http://localhost:8080/java-spring-webmvc/app1/c05_3/h2
+  //   http://localhost:9999/bitcamp-spring-webmvc/app1/c05_3/h2
   @GetMapping("h2") 
-  public String handler2(Map<String,Object> map) {
+  public String handler2(Map<String,Object> map) { // => Servlet 기술 종속성을 피하기 위해
     
     // 아규먼트에 Map 타입의 변수를 선언하면 
     // 프론트 컨트롤러는 맵 객체를 만들어 넘겨준다.
@@ -47,7 +47,7 @@ public class Controller05_3 {
   }
   
   // 테스트:
-  //   http://localhost:8080/java-spring-webmvc/app1/c05_3/h3
+  //   http://localhost:9999/bitcamp-spring-webmvc/app1/c05_3/h3
   @GetMapping("h3") 
   public String handler3(Model model) {
     
@@ -63,7 +63,7 @@ public class Controller05_3 {
   }
   
   // 테스트:
-  //   http://localhost:8080/java-spring-webmvc/app1/c05_3/h4
+  //   http://localhost:9999/bitcamp-spring-webmvc/app1/c05_3/h4
   @GetMapping("h4") 
   public ModelAndView handler4() {
     

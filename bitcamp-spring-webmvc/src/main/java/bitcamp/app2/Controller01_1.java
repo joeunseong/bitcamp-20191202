@@ -24,7 +24,10 @@ public class Controller01_1 {
     // 기본 ViewResolver는 리턴 값으로 URL을 받아 
     // 웹 애플리케이션 디렉토리에서 JSP를 찾는다.
     // 웹 애프리케이션이 경로가 /bitcamp-java-spring-webmvc 라면, JSP 경로는 다음과 같다.
-    //   /bitcamp-java-spring-webmvc/jsp/c01_1.jsp
+    // =>/bitcamp-spring-webmvc/jsp/c01_1.jsp
+    //
+    // InternalResourceViewResolver로 교체한 다음의 다음의 JSP URL은?
+    // => /WEB-INF/jsp2//jsp/c01_1.jsp.jsp
   }
 
   // 테스트:
@@ -36,6 +39,11 @@ public class Controller01_1 {
     
     // 기본 ViewRosolver를 사용할 때는 
     // 뷰 이름을 리턴하지 않으면 오류 발생!
+    //
+    // InternalResourceViewResolver로 교체한 다음은?
+    // => 리턴 값이 없으면 요청 URL(/c01_1/h2)을 리턴 값으로 사용한다.
+    // => 따라서 ViewResolver가 계산한 최종 URL은
+    //    /WEB-INF/jsp2/c01_1/h2.jsp
   }
   
   // 테스트:

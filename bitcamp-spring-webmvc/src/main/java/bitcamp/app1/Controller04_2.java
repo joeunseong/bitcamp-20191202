@@ -19,7 +19,7 @@ public class Controller04_2 {
   //    단 파라미터 앞에 @RequestParam 애노테이션을 붙인다.
   //    그리고 클라이언트가 보낸 파라미터 이름을 지정한다.
   // 테스트:
-  //    http://localhost:8080/java-spring-webmvc/app1/c04_2/h1?name=kim
+  //    http://localhost:9999/bitcamp-spring-webmvc/app1/c04_2/h1?name=kim
   @GetMapping("h1") 
   @ResponseBody 
   public void handler1(

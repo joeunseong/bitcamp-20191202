@@ -90,14 +90,8 @@ public class Controller04_7 {
     //      0041 0042 ac00 ac01
     String namex = new String(originBytes, "UTF-8");
     
-    return String.format("name1 = %s\n"
-        + "name2 = %s\n"
-        + "name3 = %s\n"
-        + "age = %d\n", 
-        name1, 
-        namex, 
-        name3, 
-        age);
+    return String.format("name1=%s\n name2=%s\n name2=%s\n name3=%s\n age=%d\n", 
+        name1, name2, namex,  name3, age);
   }
   
 
