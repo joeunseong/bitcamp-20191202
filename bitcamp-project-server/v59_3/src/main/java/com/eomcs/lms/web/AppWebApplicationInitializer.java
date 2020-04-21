@@ -5,7 +5,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import com.eomcs.lms.AppConfig;
 
-public class AdminWebApplicationInitializer
+public class AppWebApplicationInitializer
     extends AbstractAnnotationConfigDispatcherServletInitializer {
 
   // String uploadTmpDir;
@@ -17,12 +17,12 @@ public class AdminWebApplicationInitializer
 
   @Override
   protected Class<?>[] getRootConfigClasses() {
-    return null;
+    return new Class<?>[] {AppConfig.class};
   }
 
   @Override
   protected Class<?>[] getServletConfigClasses() {
-    return new Class<?>[] {AppConfig.class};
+    return new Class<?>[] {AppWebConfig.class};
   }
 
   @Override
@@ -39,7 +39,7 @@ public class AdminWebApplicationInitializer
 
   @Override
   protected String getServletName() {
-    return "app1";
+    return "app";
   }
 
 
