@@ -21,6 +21,7 @@
       <result column="file_path"  property="filepath"/>
     </collection>
   </resultMap>
+    
   <insert id="insert" parameterType="PhotoBoard"
     useGeneratedKeys="true" keyColumn="photo_id" keyProperty="no">
     insert into lms_photo(titl,lesson_id) 
