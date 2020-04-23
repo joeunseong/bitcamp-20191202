@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class Controller02_1 {
 
   // 테스트:
-  //   http://localhost:8080/java-spring-webmvc/app2/c02_1?name=kim&age=20
+  //   http://localhost:9999/bitcamp-spring-webmvc/app2/c02_1?name=kim&age=20
   @GetMapping
   @ResponseBody
   public String handler1(String name, int age) {
@@ -27,7 +27,7 @@ public class Controller02_1 {
   }
 
   // 테스트:
-  //   http://localhost:8080/java-spring-webmvc/app2/c02_1/kim/20
+  //   http://localhost:9999/bitcamp-spring-webmvc/app2/c02_1/kim/20
   @GetMapping("{name}/{age}")
   @ResponseBody
   public String handler2(
@@ -52,7 +52,7 @@ public class Controller02_1 {
   }
  
   // 테스트:
-  //   http://localhost:8080/java-spring-webmvc/app2/c02_1/kim_20
+  //   http://localhost:9999/bitcamp-spring-webmvc/app2/c02_1/kim_20
   @GetMapping("{name}_{age}")
   @ResponseBody
   public String handler3(

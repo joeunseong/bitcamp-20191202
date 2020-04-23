@@ -62,7 +62,7 @@ public class Controller03_2 {
       // @ModelAttribute 에 지정된 이름이 @SessionAttributes에 있는 경우 
       // => 세션에 해당 값이 있으면 아규먼트에 넣어 준다.
       // => 세션에 해당 값이 없으면 예외가 발생한다.
-      @ModelAttribute("name2") String name2,
+      @ModelAttribute("name2") String name2, // @SessionAttributes에 등록된 값이 없으면 에러 뜸
       @ModelAttribute("age2") String age2,
       
       // @ModelAttribute 에 지정된 이름이 @SessionAttributes에 없는 경우 

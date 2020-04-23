@@ -22,17 +22,17 @@ public class Controller02_2 {
   }
 
   // 테스트:
-  //   http://.../app2/c02_2/name=kim;age=20
-  @GetMapping(value="{value}", produces="text/plain;charset=UTF-8")
+  //   http://.../app2/c02_2/name=kim;age=20 => MatrixVariable 
+  @GetMapping(value="{value}", produces="text/plain;charset=UTF-8") // ; 앞까지가 value
   @ResponseBody
   public String handler2(
       @PathVariable("value") String value,
       // value 값 중에서 name 항목의 값을 받고 싶을 때 @MatrixVariable 을 사용한다.
       // 단 value의 형식은 "이름=값;이름=값;이름=값" 형태여야 한다.
-      /*
-      @MatrixVariable("name") String name,
-      @MatrixVariable("age") int age
-      */
+      //
+      // @MatrixVariable("name") String name,
+      // @MatrixVariable("age") int age
+      //
       // 매트릭스 변수명을 생략하면 아규먼트의 이름을 사용한다.
       @MatrixVariable String name,
       @MatrixVariable int age

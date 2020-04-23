@@ -53,11 +53,14 @@ public class Controller03_3 {
     // 용도:
     // => 현재 페이지 컨트롤러가 작업하면서 세션에 데이터를 보관했고, 
     //    현제 페이지 컨트롤러가 보관한 데이터만 삭제하고 싶다면 이 방식으로 처리하라.
-    //
+    // => 즉 세션을 그대로 유지한채로 이 페이지 컨트롤러에서 
+    //    @SessionAttributes로 지정한 값만 무효화 시킬 때 사용한다.
     return "status.setComplete()";
   }
 
- 
+  // session.setAttribute()를 하면 프로그램이 종료될 때까지 세션을 유지시키고
+  // @SessionAttributes는 현재 페이지 컨트롤러 안에서만 쓰고 싶을때 사용 => 꺼내고 싶을 때 @ModelAttribute를 사용
+  // setComplete() 는 그 페이지의 @SessionAttributes으로 설정한 값들만 삭제
 }
 
 
