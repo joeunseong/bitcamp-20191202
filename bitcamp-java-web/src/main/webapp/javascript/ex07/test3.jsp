@@ -23,9 +23,3 @@ Thread.currentThread().sleep(5000); // 5초 후에 나머지 데이터를 보낸
 
 
 
-
-
-
-
-
-
