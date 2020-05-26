@@ -1,24 +1,28 @@
 package bitcamp.app2;
 
-import java.util.Date;
+import java.sql.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class Board { 
+public class Board {
   protected int no;
   protected String title;
   protected String content;
   protected String writer;
   protected int viewCount;
-  
-  // 이 애노테이션을 setter나 field에 붙이면 된다.
-  @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
+
+  // Jackson 라이브러리를 사용한다면
+  // Date 필드의 JSON 출력 형식을 지정할 수 있다.
+  // 다음 애노테이션을 setter나 field에 붙이면 된다.
+  @JsonFormat(
+      shape=JsonFormat.Shape.STRING,
+      pattern="yyyy-MM-dd")
   protected Date createdDate;
-  
+
   public Board() {
   }
-  
+
   public Board(
-      int no, String title, String content, String writer, 
+      int no, String title, String content, String writer,
       int viewCount, Date createdDate) {
     this.no = no;
     this.title = title;
@@ -27,7 +31,7 @@ public class Board {
     this.viewCount = viewCount;
     this.createdDate = createdDate;
   }
-  
+
   @Override
   public String toString() {
     return "Board [no=" + no + ", title=" + title + ", content=" + content + ", writer=" + writer
@@ -67,7 +71,7 @@ public class Board {
   public Date getCreatedDate() {
     return createdDate;
   }
-  
+
   //@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
   public void setCreatedDate(Date createdDate) {
     this.createdDate = createdDate;

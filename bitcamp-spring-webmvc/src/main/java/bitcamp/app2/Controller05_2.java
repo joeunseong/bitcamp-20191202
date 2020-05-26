@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller05_2 {
 
   ArrayList<Board> list = new ArrayList<>();
-  
+
   public Controller05_2() {
     list.add(new Board(1, "제목입니다1", "내용", "홍길동", 10, Date.valueOf("2019-5-1")));
     list.add(new Board(2, "제목입니다2", "내용", "홍길동2", 11, Date.valueOf("2019-5-2")));
@@ -33,7 +33,7 @@ public class Controller05_2 {
     list.add(new Board(12, "제목입니다12", "내용", "홍길동12", 12, Date.valueOf("2019-9-1")));
     list.add(new Board(13, "제목입니다13", "내용", "홍길동13", 13, Date.valueOf("2019-10-1")));
   }
-  
+
   // 테스트:
   //   http://.../app2/c05_2/h1
   @GetMapping("h1")
@@ -45,27 +45,27 @@ public class Controller05_2 {
   //   http://.../app2/c05_2/h2
   @GetMapping(value="h2", produces="text/plain;charset=UTF-8")
   public String handler2() {
-    return "안녕하세요!"; // String 타입은 그대로 출력한다. 
-                       // 단 출력 문자열의 인코딩을 지정해야 한글이 깨지지 않는다.
+    return "안녕하세요!"; // String 타입은 그대로 출력한다.
+    // 단 출력 문자열의 인코딩을 지정해야 한글이 깨지지 않는다.
   }
-  
+
   // 테스트:
   //   http://.../app2/c05_2/h3
   @GetMapping("h3")
   public int handler3() {
     return 100; // primitive 타입의 값도 그대로 출력한다.
   }
-  
+
   // 테스트:
   //   http://.../app2/c05_2/h4
   @GetMapping("h4")
   public Object handler4() {
-    // primitive 타입이나 String 타입의 값을 JSON 형식으로 출력하려면 
+    // primitive 타입이나 String 타입의 값을 JSON 형식으로 출력하려면
     // 도메인 객체나 맵 객체 담아 리턴하라!
     HashMap<String,Object> content = new HashMap<>();
     content.put("v1", 100);
     content.put("v2", "Hello");
-    
+
     return content;
   }
 }
