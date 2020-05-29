@@ -1,17 +1,17 @@
 -- 수업 테이블 삭제 
-drop table if exists lms_lesson;
+drop table if exists movie_info;
 
 -- 회원 테이블 삭제
-drop table if exists lms_member;
+drop table if exists movie_member;
 
 -- 게시판 테이블 삭제 
-drop table if exists lms_board;
+drop table if exists movie_review;
 
 -- 사진 게시판 테이블 삭제
-drop table if exists lms_photo;
+drop table if exists movie_photo;
 
 -- 사진 게시물 첨부 파일 테이블 삭제
-drop table if exists lms_photo_file;
+drop table if exists movie_photo_file;
 
 -- 영화 정보 테이블 생성
 create table movie_info (
